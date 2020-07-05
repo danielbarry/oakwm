@@ -1,8 +1,7 @@
+#include "border.hh"
 
-#include "Border.h"
-#include "Client.h"
-#include "Manager.h"
-#include "Rotated.h"
+#include "client.hh"
+#include "manager.hh"
 
 // These are degenerate initialisations, don't change them
 int Border::m_tabWidth = -1;
@@ -173,7 +172,7 @@ void Border::fixTabHeight(int maxHeight)
 
     if (m_label) free(m_label);
     m_label = NewString(m_client->label());
-    
+
     if (m_label) {
 	m_tabHeight =
 	    XRotTextWidth(m_tabFont, m_label, strlen(m_label)) + 6 + m_tabWidth;
@@ -259,7 +258,7 @@ void Border::setTransientFrameVisibility(Boolean visible, int w, int h)
 	(display(), m_parent, ShapeClip,
 	 0, 0, rl.array(0, rl.count()), rl.count(),
 	 visible ? ShapeUnion : ShapeSubtract, YXSorted);
-}   
+}
 
 
 void Border::shapeParent(int w, int h)
@@ -428,7 +427,7 @@ void Border::resizeTab(int h)
     for (i = 1; i < m_tabWidth - 1; ++i) {
 	rl.appendRect(i, m_tabHeight + i - 1, m_tabWidth - i + 2, 1);
     }
-	
+
     XShapeCombineRectangles
 	(display(), m_parent, ShapeBounding,
 	 0, 0, rl.array(0, rl.count()), rl.count(), ShapeUnion, YXBanded);
@@ -631,7 +630,7 @@ void Border::configure(int x, int y, int w, int h,
     wc.x = w - FRAME_WIDTH*2;
     wc.y = h - FRAME_WIDTH*2;
     XConfigureWindow(display(), m_resize, rmask, &wc);
-    
+
     if (force ||
 	(m_prevW < 0 || m_prevH < 0) ||
 	((mask & (CWWidth | CWHeight)) && (w != m_prevW || h != m_prevH))) {

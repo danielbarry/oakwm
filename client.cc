@@ -1,12 +1,8 @@
-
-#include "Manager.h"
-#include "Client.h"
+#include "client.hh"
 
 #include <X11/Xutil.h>
 
 const char *const Client::m_defaultLabel = "incognito";
-
-
 
 Client::Client(WindowManager *const wm, Window w) :
     m_window(w),
@@ -45,7 +41,7 @@ Client::Client(WindowManager *const wm, Window w) :
 Client::~Client()
 {
     // empty
-}    
+}
 
 
 void Client::release()
@@ -220,7 +216,7 @@ void Client::manage(Boolean mapped)
 
     if (m_x < m_border->xIndent()) m_x = m_border->xIndent();
     if (m_y < m_border->yIndent()) m_y = m_border->yIndent();
-    
+
     m_border->configure(m_x, m_y, m_w, m_h, 0L, Above);
 
     if (mapped) m_reparenting = True;
@@ -249,7 +245,7 @@ void Client::manage(Boolean mapped)
 	    deactivate();
 	}
     }
-    
+
     if (activeClient() && !isActive()) {
 	activeClient()->installColormap();
     }
@@ -333,7 +329,7 @@ void Client::activate()
 
 void Client::deactivate()	// called from wm?
 {
-//    fprintf(stderr, 
+//    fprintf(stderr,
 //	    "Client::deactivate (this = %p, window = %x, parent = %x)\n",
 //	    this, m_window, parent());
 
@@ -400,7 +396,7 @@ char *Client::getProperty(Atom a)
 }
 
 
-int Client::getAtomProperty(Atom a, Atom type)
+char *Client::getAtomProperty(Atom a, Atom type)
 {
     char **p, *x;
     if (getProperty_aux(display(), m_window, a, type, 1L,
@@ -410,13 +406,13 @@ int Client::getAtomProperty(Atom a, Atom type)
 
     x = *p;
     XFree((void *)p);
-    return (int)x;
+    return x;
 }
 
 
-int Client::getIntegerProperty(Atom a)
+int *Client::getIntegerProperty(Atom a)
 {
-    return getAtomProperty(a, XA_INTEGER);
+    return (int*)getAtomProperty(a, XA_INTEGER);
 }
 
 
@@ -594,7 +590,7 @@ void Client::getColormaps(void)
 	m_colormapWinCount = 0;
 	return;
     }
-    
+
     m_colormapWinCount = n;
     m_colormapWindows = cw;
 
@@ -624,7 +620,7 @@ void Client::getTransient()
 		    "for\nitself -- ignoring WM_TRANSIENT_FOR property...\n",
 		    m_label ? m_label : "(no name)");
 	    m_transient = None;
-	} else {		
+	} else {
 	    m_transient = t;
 	}
     } else {
@@ -742,7 +738,7 @@ void Client::ensureVisible()
     int my = DisplayHeight(display(), 0) - 1;
     int px = m_x;
     int py = m_y;
-    
+
     if (m_x + m_w > mx) m_x = mx - m_w;
     if (m_y + m_h > my) m_y = my - m_h;
     if (m_x < 0) m_x = 0;

@@ -1,6 +1,5 @@
+#include "manager.hh"
 
-#include "Manager.h"
-#include "Client.h"
 #include <sys/time.h>
 
 #define AllButtonMask	( Button1Mask | Button2Mask | Button3Mask \
@@ -130,7 +129,7 @@ void WindowManager::releaseGrab(XButtonEvent *e)
 void WindowManager::menu(XButtonEvent *e)
 {
     if (e->window == m_menuWindow) return;
-    
+
     int i;
     ClientList clients;
     Boolean allowExit = False;
@@ -168,7 +167,7 @@ void WindowManager::menu(XButtonEvent *e)
 
     int selecting = -1, prev = -1;
     int entryHeight = m_menuFont->ascent + m_menuFont->descent + 4;
-    int totalHeight = entryHeight * n + 13; 
+    int totalHeight = entryHeight * n + 13;
     int x = e->x - maxWidth/2;
     int y = e->y - 2;
     Boolean warp = False;
@@ -203,7 +202,7 @@ void WindowManager::menu(XButtonEvent *e)
 
     while (!done) {
 	XMaskEvent(display(), MenuMask, &event);
-	
+
 	switch (event.type) {
 
 	default:
@@ -278,8 +277,8 @@ void WindowManager::menu(XButtonEvent *e)
 		int dx = XTextWidth(m_menuFont, MENU_LABEL(i),
 				    strlen(MENU_LABEL(i)));
 		int dy = i * entryHeight + m_menuFont->ascent + 10;
-		
-		if (i >= nh) {		    
+
+		if (i >= nh) {
 		    XDrawString(display(), m_menuWindow, m_menuGC,
 				maxWidth - 8 - dx, dy,
 				MENU_LABEL(i), strlen(MENU_LABEL(i)));
@@ -332,7 +331,7 @@ void WindowManager::showGeometry(int x, int y)
     int height = m_menuFont->ascent + m_menuFont->descent + 8;
     int mx = DisplayWidth (display(), m_screenNumber) - 1;
     int my = DisplayHeight(display(), m_screenNumber) - 1;
-  
+
     XMoveResizeWindow(display(), m_menuWindow,
 		      (mx - width) / 2, (my - height) / 2, width, height);
     XClearWindow(display(), m_menuWindow);
@@ -382,7 +381,7 @@ void Client::move(XButtonEvent *e)
 	    select(0, 0, 0, 0, &sleepval);
 	    continue;
 	}
-	
+
 	switch (event.type) {
 
 	default:
@@ -438,7 +437,7 @@ void Client::fixResizeDimensions(int &w, int &h, int &dw, int &dh)
 {
     if (w < 50) w = 50;
     if (h < 50) h = 50;
-    
+
     if (m_sizeHints.flags & PResizeInc) {
 	w = m_minWidth  + (((w - m_minWidth) / m_sizeHints.width_inc) *
 			   m_sizeHints.width_inc);
@@ -510,7 +509,7 @@ void Client::resize(XButtonEvent *e, Boolean horizontal, Boolean vertical)
 	    select(0, 0, 0, 0, &sleepval);
 	    continue;
 	}
-	
+
 	switch (event.type) {
 
 	default:
@@ -533,7 +532,7 @@ void Client::resize(XButtonEvent *e, Boolean horizontal, Boolean vertical)
 
 	    if (!nobuttons(&event.xbutton)) x = -1;
 	    m_windowManager->releaseGrab(&event.xbutton);
-	    
+
 	    done = True;
 	    break;
 
@@ -628,7 +627,7 @@ void Border::eventButton(XButtonEvent *e)
 
 	m_client->moveOrResize(e);
 	return;
-	
+
     } else if (e->window == m_tab) {
 	m_client->move(e);
 	return;

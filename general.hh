@@ -1,6 +1,4 @@
-
-#ifndef _GENERAL_H_
-#define _GENERAL_H_
+#pragma once
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -32,7 +30,7 @@ typedef char Boolean;
 #define NewString(x) (strcpy((char *)malloc(strlen(x)+1),(x)))
 
 #ifndef SIGNAL_CALLBACK_TYPE
-#define SIGNAL_CALLBACK_TYPE (void (*)(...))
+#define SIGNAL_CALLBACK_TYPE (void (*)(int))
 #endif
 
 #define signal(x,y)     \
@@ -44,7 +42,7 @@ typedef char Boolean;
     (void)sigaction((x), &sAct, NULL); \
   } while (0)
 
-#include "Config.h"
+#include "config.hh"
 
 class Atoms {
 public:
@@ -58,5 +56,3 @@ public:
 };
 
 extern Boolean ignoreBadWindowErrors; // tidiness hack
-
-#endif

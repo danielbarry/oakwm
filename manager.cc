@@ -1,11 +1,16 @@
+#include "manager.hh"
 
-#include "Manager.h"
-#include "Client.h"
+#include "border.cc"
+#include "buttons.cc"
+#include "client.cc"
+#include "cursors.hh"
+#include "events.cc"
+#include "rotated.cc"
+
 #include <string.h>
 #include <X11/Xproto.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include "Cursors.h"
 
 Atom    Atoms::wm_state;
 Atom    Atoms::wm_changeState;
@@ -110,12 +115,12 @@ WindowManager::WindowManager() :
     XSync(m_display, False);
     m_initialising = False;
     m_returnCode = 0;
-    
+
     clearFocus();
     scanInitialWindows();
     loop();
 }
-    
+
 
 WindowManager::~WindowManager()
 {
@@ -144,7 +149,7 @@ void WindowManager::release()
     }
 
     m_clients.remove_all();
-    
+
     for (i = 0; i < unparentList.count(); ++i) {
 //	fprintf(stderr, "unparenting client %p\n",unparentList.item(i));
 	unparentList.item(i)->unreparent();
@@ -205,7 +210,7 @@ int WindowManager::errorHandler(Display *d, XErrorEvent *e)
     }
 
     return 0;
-}    
+}
 
 
 static Cursor makeCursor(Display *d, Window w,
@@ -271,7 +276,7 @@ void WindowManager::initialiseScreen()
     XSetWindowAttributes attr;
     attr.cursor = m_cursor;
     attr.event_mask = SubstructureRedirectMask | SubstructureNotifyMask |
-	ColormapChangeMask | ButtonPressMask | ButtonReleaseMask | 
+	ColormapChangeMask | ButtonPressMask | ButtonReleaseMask |
 	PropertyChangeMask;
     XChangeWindowAttributes(m_display, m_root, CWCursor | CWEventMask, &attr);
     XSync(m_display, False);
@@ -304,7 +309,7 @@ void WindowManager::initialiseScreen()
     if (!m_menuFont) m_menuFont = XLoadQueryFont(display(),
 						 CONFIG_NASTY_FONT);
     if (!m_menuFont) fatal("couldn't load default menu font\n");
-    
+
     values.font = m_menuFont->fid;
     m_menuGC = XCreateGC
 	(display(), root(), GCForeground | GCBackground |
@@ -348,7 +353,7 @@ void WindowManager::installCursorOnWindow(RootCursor c, Window w)
 
     XChangeWindowAttributes(m_display, w, CWCursor, &attr);
 }
-	
+
 
 Time WindowManager::timestamp(Boolean reset)
 {

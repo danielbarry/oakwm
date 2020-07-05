@@ -1,7 +1,5 @@
-
-#include "Manager.h"
-#include "Client.h"
-
+#include "client.hh"
+#include "manager.hh"
 
 int WindowManager::loop()
 {
@@ -49,11 +47,11 @@ int WindowManager::loop()
 	case ColormapNotify:
 	    eventColormap(&ev.xcolormap);
 	    break;
-	    
+
 	case PropertyNotify:
 	    eventProperty(&ev.xproperty);
 	    break;
-	    
+
 	case SelectionClear:
 	    fprintf(stderr, "wm2: SelectionClear (this should not happen)\n");
 	    break;
@@ -106,7 +104,7 @@ int WindowManager::loop()
 	    break;
 	}
     }
-    
+
     release();
     return m_returnCode;
 }
@@ -243,7 +241,7 @@ void Client::focusIfAppropriate(Boolean ifActive)
     if (!CONFIG_AUTO_RAISE) return;
     if (!m_managed || !isNormal()) return;
     if (!ifActive && isActive()) return;
-    
+
     Window rw, cw;
     int rx, ry, cx, cy;
     unsigned int k;

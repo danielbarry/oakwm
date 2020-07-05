@@ -1,9 +1,6 @@
+#pragma once
 
-#ifndef _BORDER_H_
-#define _BORDER_H_
-
-#include "General.h"
-#include "Rotated.h"
+#include "rotated.hh"
 
 class Client;
 class WindowManager;
@@ -56,7 +53,7 @@ public:
     }
 
     Boolean coordsInHole(int, int); // in Events.C of all places
-    
+
 private:
     Client *m_client;
 
@@ -95,7 +92,3 @@ private:
     static unsigned long m_buttonBackgroundPixel;
     static unsigned long m_borderPixel;
 };
-
-
-#endif
-

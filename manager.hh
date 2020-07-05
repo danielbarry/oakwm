@@ -1,13 +1,10 @@
+#pragma once
 
-#ifndef _MANAGER_H_
-#define _MANAGER_H_
-
-#include "General.h"
-#include "listmacro2.h"
+#include "general.hh"
+#include "listmacro2.hh"
 
 class Client;
 declarePList(ClientList, Client);
-
 
 class WindowManager {
 public:
@@ -69,7 +66,7 @@ private:
     Cursor m_vCursor;
     Cursor m_hCursor;
     Cursor m_vhCursor;
-    
+
     char *m_terminal;
     char *m_shell;
 
@@ -126,6 +123,3 @@ private:
     void eventReparent(XReparentEvent *);
     void eventFocusIn(XFocusInEvent *);
 };
-
-#endif
-

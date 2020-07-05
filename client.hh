@@ -1,11 +1,6 @@
+#pragma once
 
-#ifndef _CLIENT_H_
-#define _CLIENT_H_
-
-#include "General.h"
-#include "Manager.h"
-#include "Border.h"
-
+#include "manager.hh"
 
 class Client {
 public:
@@ -125,10 +120,10 @@ private:
     WindowManager *const m_windowManager;
 
     char *getProperty(Atom);
-    int getAtomProperty(Atom, Atom);
-    int getIntegerProperty(Atom);
+    char *getAtomProperty(Atom, Atom);
+    int *getIntegerProperty(Atom);
 
-    // accessors 
+    // accessors
     Boolean getState(int *);
     void setState(int);
 
@@ -143,6 +138,3 @@ private:
 
 #define Pdelete    1
 #define PtakeFocus 2
-
-#endif
-
