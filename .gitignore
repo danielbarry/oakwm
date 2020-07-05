@@ -1,0 +1,8 @@
+CMakeFiles/**
+
+*.cmake
+*.swp
+
+CMakeCache.txt
+Makefile
+oakwm
