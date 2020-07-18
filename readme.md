@@ -21,6 +21,8 @@ oakwm provides:
 * No configurable root menus, buttons or mouse or keyboard bindings.
 * No virtual desktop, toolbars or integrated applications.
 
+**See the [roadmap](roadmap.md) for more information.**
+
 ## Building oakwm
 
 **TODO:** Update this section.
