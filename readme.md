@@ -90,6 +90,31 @@ option labelled "Exit wm2"; select this.
 
 All move and resize operations are opaque.
 
+## Testing
+
+Testing is performed with `oakwm` running in within Vagrant. The vagrant file
+has a low-ish execution cap and 128MB of RAM to better simulate low-powered
+devices. (You may need to adjust this to suite your particular testing needs.)
+
+You will need:
+
+* `vagrant` - A script for managing the virtual machine.
+* `virtualbox` - The virtual machine for running the window manager.
+
+To start the environment, simply type:
+
+    vagrant up --provision
+
+(It's not needed to have `--provision` on the first run, but it's good practice
+to ensure your VM is up-to-date.)
+
+Next you can either SSH into the environment (`vagrant ssh`) or use the
+VirtualBox manager to open the GUI (recommended for testing the UI).
+
+Login for vagrant is `vagrant` (username and password). Once in:
+
+    cd; sudo startx
+
 ## Focus policy
 
 **TODO:** Update this section.
