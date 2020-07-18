@@ -6,6 +6,7 @@ sudo apt-get -y upgrade
 
 # Install required files
 sudo apt-get -y install \
+  acpi                  \ # Monitor battery status
   cmake                 \ # Build script generator
   make                  \ # Build script
   libx11-dev            \ # Compile X11
