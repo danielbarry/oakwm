@@ -12,119 +12,112 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-Atom    Atoms::wm_state;
-Atom    Atoms::wm_changeState;
-Atom    Atoms::wm_protocols;
-Atom    Atoms::wm_delete;
-Atom    Atoms::wm_takeFocus;
-Atom    Atoms::wm_colormaps;
-Atom    Atoms::wm2_running;
-
-int     WindowManager::m_signalled = False;
+/* Constants */
+const char *const WindowManager::m_menuCreateLabel = "New";
+/* Internal atomic (thread-safe) state */
+Atom Atoms::wm_state;
+Atom Atoms::wm_changeState;
+Atom Atoms::wm_protocols;
+Atom Atoms::wm_delete;
+Atom Atoms::wm_takeFocus;
+Atom Atoms::wm_colormaps;
+Atom Atoms::wm2_running;
+/* Hidden internal variables */
+int WindowManager::m_signalled = False;
 Boolean WindowManager::m_initialising = False;
 Boolean ignoreBadWindowErrors;
 
-const char *const WindowManager::m_menuCreateLabel = "New";
-
 implementPList(ClientList, Client);
 
-
 WindowManager::WindowManager() :
-    m_menuGC(0), m_menuWindow(0), m_menuFont(0), m_focusChanging(False)
-{
-    fprintf(stderr, "\nwm2: Copyright (c) 1996-7 Chris Cannam."
-	    "  Fourth release, March 1997\n"
-	    "     Parts derived from 9wm Copyright (c) 1994-96 David Hogan\n"
-	    "     %s\n     Copying and redistribution encouraged.  "
-	    "No warranty.\n\n", XV_COPYRIGHT);
-
-    if (CONFIG_AUTO_RAISE) {
-	if (CONFIG_CLICK_TO_FOCUS) {
-	    fatal("can't have auto-raise-with-delay with click-to-focus");
-	} else if (CONFIG_RAISE_ON_FOCUS) {
-	    fatal("can't have raise-on-focus AND auto-raise-with-delay");
-	} else {
-	    fprintf(stderr, "     Focus follows, auto-raise with delay.  ");
-	}
-
-    } else {
-	if (CONFIG_CLICK_TO_FOCUS) {
-	    if (CONFIG_RAISE_ON_FOCUS) {
-		fprintf(stderr, "     Click to focus.  ");
-	    } else {
-		fatal("can't have click-to-focus without raise-on-focus");
-	    }
-	} else {
-	    if (CONFIG_RAISE_ON_FOCUS) {
-		fprintf(stderr, "     Focus follows, auto-raise.  ");
-	    } else {
-		fprintf(stderr, "     Focus follows pointer.  ");
-	    }
-	}
+  m_menuGC(0), m_menuWindow(0), m_menuFont(0), m_focusChanging(False){
+  /* Ensure user defined settings are actually sane */
+  if(CONFIG_AUTO_RAISE){
+    if(CONFIG_CLICK_TO_FOCUS){
+      fatal("can't have auto-raise-with-delay with click-to-focus");
+    }else if(CONFIG_RAISE_ON_FOCUS){
+      fatal("can't have raise-on-focus AND auto-raise-with-delay");
+    }else{
+      fprintf(stderr, "     Focus follows, auto-raise with delay.  ");
     }
-
-    if (CONFIG_EVERYTHING_ON_ROOT_MENU) {
-	fprintf(stderr, "All clients on menu.\n");
-    } else {
-	fprintf(stderr, "Hidden clients only on menu.\n");
+  }else{
+    if(CONFIG_CLICK_TO_FOCUS){
+      if(CONFIG_RAISE_ON_FOCUS){
+        fprintf(stderr, "     Click to focus.  ");
+      }else{
+        fatal("can't have click-to-focus without raise-on-focus");
+      }
+    }else{
+      if(CONFIG_RAISE_ON_FOCUS){
+        fprintf(stderr, "     Focus follows, auto-raise.  ");
+      }else{
+        fprintf(stderr, "     Focus follows pointer.  ");
+      }
     }
-
-    if (CONFIG_PROD_SHAPE) {
-	fprintf(stderr, "     Shape prodding on.  ");
-    } else {
-	fprintf(stderr, "     Shape prodding off.  ");
-    }
-
-    fprintf(stderr, "\n     (To reconfigure, simply edit and recompile.)\n\n");
-
-    m_display = XOpenDisplay(NULL);
-    if (!m_display) fatal("can't open display");
-
-    m_shell = (char *)getenv("SHELL");
-    if (!m_shell) m_shell = NewString("/bin/sh");
-
-    m_initialising = True;
-    XSetErrorHandler(errorHandler);
-    ignoreBadWindowErrors = False;
-
-    // 9wm does more, I think for nohup
-    signal(SIGTERM, sigHandler);
-    signal(SIGINT,  sigHandler);
-    signal(SIGHUP,  sigHandler);
-
-    m_currentTime = -1;
-    m_activeClient = 0;
-
-    Atoms::wm_state      = XInternAtom(m_display, "WM_STATE",            False);
-    Atoms::wm_changeState= XInternAtom(m_display, "WM_CHANGE_STATE",     False);
-    Atoms::wm_protocols  = XInternAtom(m_display, "WM_PROTOCOLS",        False);
-    Atoms::wm_delete     = XInternAtom(m_display, "WM_DELETE_WINDOW",    False);
-    Atoms::wm_takeFocus  = XInternAtom(m_display, "WM_TAKE_FOCUS",       False);
-    Atoms::wm_colormaps  = XInternAtom(m_display, "WM_COLORMAP_WINDOWS", False);
-    Atoms::wm2_running   = XInternAtom(m_display, "_WM2_RUNNING",        False);
-
-    int dummy;
-    if (!XShapeQueryExtension(m_display, &m_shapeEvent, &dummy))
-	fatal("no shape extension, can't run without it");
-
-    // we only cope with one screen!
-    initialiseScreen();
-
-    XSetSelectionOwner(m_display, Atoms::wm2_running,
-		       m_menuWindow, timestamp(True));
-    XSync(m_display, False);
-    m_initialising = False;
-    m_returnCode = 0;
-
-    clearFocus();
-    scanInitialWindows();
-    loop();
+  }
+  /* Inform user which configuration they selected */
+  if(CONFIG_EVERYTHING_ON_ROOT_MENU){
+    fprintf(stderr, "All clients on menu.\n");
+  }else{
+    fprintf(stderr, "Hidden clients only on menu.\n");
+  }
+  /* Inform user which configuration they selected */
+  if(CONFIG_PROD_SHAPE){
+    fprintf(stderr, "     Shape prodding on.  ");
+  }else{
+    fprintf(stderr, "     Shape prodding off.  ");
+  }
+  /* Open default display (usually :0) */
+  m_display = XOpenDisplay(NULL);
+  /* Make sure we did actually get access to a display */
+  if(!m_display){
+    fatal("can't open display");
+  }
+  /* Setup default shell */
+  m_shell = (char*)getenv("SHELL");
+  if(!m_shell){
+    m_shell = NewString("/bin/sh");
+  }
+  /* Don't die just because we're starting */
+  m_initialising = True;
+  XSetErrorHandler(errorHandler);
+  ignoreBadWindowErrors = False;
+  /* TODO: Check for other signals that may need to be handled. */
+  signal(SIGTERM, sigHandler);
+  signal(SIGINT,  sigHandler);
+  signal(SIGHUP,  sigHandler);
+  /* Reset our internal state */
+  m_currentTime = -1;
+  m_activeClient = 0;
+  /* Access to internal state */
+  Atoms::wm_state      = XInternAtom(m_display, "WM_STATE",            False);
+  Atoms::wm_changeState= XInternAtom(m_display, "WM_CHANGE_STATE",     False);
+  Atoms::wm_protocols  = XInternAtom(m_display, "WM_PROTOCOLS",        False);
+  Atoms::wm_delete     = XInternAtom(m_display, "WM_DELETE_WINDOW",    False);
+  Atoms::wm_takeFocus  = XInternAtom(m_display, "WM_TAKE_FOCUS",       False);
+  Atoms::wm_colormaps  = XInternAtom(m_display, "WM_COLORMAP_WINDOWS", False);
+  Atoms::wm2_running   = XInternAtom(m_display, "_WM2_RUNNING",        False);
+  /* TODO: Check whether shape extension really needed after changes. */
+  int dummy;
+  if(!XShapeQueryExtension(m_display, &m_shapeEvent, &dummy)){
+    fatal("no shape extension, can't run without it");
+  }
+  /* NOTE: We only cope with one screen. */
+  initialiseScreen();
+  XSetSelectionOwner(m_display, Atoms::wm2_running, m_menuWindow, timestamp(True));
+  XSync(m_display, False);
+  m_initialising = False;
+  m_returnCode = 0;
+  /* Final prep before main loop */
+  clearFocus();
+  scanInitialWindows();
+  /* Enter main loop */
+  loop();
 }
 
 
-WindowManager::~WindowManager()
-{
-    // empty
+WindowManager::~WindowManager(){
+  /* Do nothing */
 }
 
 
@@ -174,12 +167,11 @@ void WindowManager::release()
 }
 
 
-void WindowManager::fatal(const char *message)
-{
-    fprintf(stderr, "wm2: ");
-    perror(message);
-    fprintf(stderr, "\n");
-    exit(1);
+void WindowManager::fatal(const char *message){
+  fprintf(stderr, "oakwm: ");
+  perror(message);
+  fprintf(stderr, "\n");
+  exit(1);
 }
 
 
@@ -397,23 +389,26 @@ void WindowManager::scanInitialWindows()
     XFree((void *)wins);
 }
 
-Client *WindowManager::windowToClient(Window w, Boolean create)
-{
-    if (w == 0) return 0;
-
-    for (int i = m_clients.count()-1; i >= 0; --i) {
-
-	if (m_clients.item(i)->hasWindow(w)) {
-	    return m_clients.item(i);
-	}
+Client* WindowManager::windowToClient(Window w, Boolean create){
+  /* If no window was provided, we can't return a client */
+  if(w == NULL){
+    return NULL;
+  }
+  /* Search for a client for a given window */
+  /* TODO: Slow method for searching, perhaps map the values. */
+  for(int i = m_clients.count() - 1; i >= 0; --i){
+    if(m_clients.item(i)->hasWindow(w)){
+      return m_clients.item(i);
     }
-
-    if (!create) return 0;
-    else {
-	Client *newC = new Client(this, w);
-	m_clients.append(newC);
-	return newC;
-    }
+  }
+  /* If we're here, we might need to create a client */
+  if(!create){
+    return NULL;
+  }else{
+    Client* newC = new Client(this, w);
+    m_clients.append(newC);
+    return newC;
+  }
 }
 
 void WindowManager::installColormap(Colormap cmap)
