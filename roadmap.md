@@ -15,5 +15,20 @@
 
 * `[x]` Source code building
 * `[x]` Window manager running in VM
-* `[ ]` Cleanup source code
+* `[ ]` Clean-up source code
+  * `[ ]` `border.cc`
+  * `[ ]` `client.cc`
+  * `[ ]` `cursors.hh`
+  * `[ ]` `listmacro2.hh`
+  * `[~]` `manager.hh`
+  * `[ ]` `border.hh`
+  * `[ ]` `client.hh`
+  * `[ ]` `events.cc`
+  * `[x]` `main.cc`
+  * `[ ]` `rotated.cc`
+  * `[ ]` `buttons.cc`
+  * `[ ]` `config.hh`
+  * `[ ]` `general.hh`
+  * `[~]` `manager.cc`
+  * `[ ]` `rotated.hh`
 * `[ ]` Design user interface
