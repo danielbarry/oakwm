@@ -1,6 +1,6 @@
 # oakwm -- a window manager
 
-![Version 2020.07.18](doc/v2020.07.18.png)
+![Version 2020.07.19](doc/v2020.07.19.png)
 
 oakwm is a window manager for X. It provides an unusual style of window
 decoration and as little functionality as we feel comfortable with in a
