@@ -6,3 +6,10 @@ CMakeFiles/**
 CMakeCache.txt
 Makefile
 oakwm
+
+# Ignore virtual machine files
+.Xauthority-c
+.bash_history
+.local/**
+.vagrant/**
+.viminfo
