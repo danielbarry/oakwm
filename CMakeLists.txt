@@ -17,3 +17,4 @@ set_property(CACHE CMAKE_BUILD_TYPE PROPERTY VALUE "MinSizeRel")
 
 # Binary
 add_executable(oakwm         src/main.cc)
+add_executable(oakwm-toolbar src/toolbar.cc)

@@ -6,6 +6,7 @@ CMakeFiles/**
 CMakeCache.txt
 Makefile
 oakwm
+oakwm-toolbar
 
 # Ignore virtual machine files
 .Xauthority-c
