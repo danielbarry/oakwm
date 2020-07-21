@@ -16,4 +16,4 @@ set_property(CACHE CMAKE_CXX_FLAGS  PROPERTY VALUE "${CXX_FLAGS}")
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY VALUE "MinSizeRel")
 
 # Binary
-add_executable(oakwm main.cc)
+add_executable(oakwm         src/main.cc)
