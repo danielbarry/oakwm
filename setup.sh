@@ -6,13 +6,13 @@ sudo apt-get -y upgrade
 
 # Install required files
 sudo apt-get -y install \
-  acpi                  \ # Monitor battery status
-  cmake                 \ # Build script generator
-  make                  \ # Build script
-  libx11-dev            \ # Compile X11
+  acpi                  \
+  cmake                 \
+  make                  \
+  libx11-dev            \
   libxmu-dev            \
   libxtst-dev           \
-  xorg                    # X11
+  xorg
 
 # Set the window manager details
 sudo ln -s /home/vagrant/.xinitrc /root/.xinitrc
