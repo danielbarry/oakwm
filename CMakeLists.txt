@@ -39,7 +39,8 @@ execute_process(COMMAND
 
 # Generate version information
 configure_file("src/version.cc.in" "src/version.cc" @ONLY)
+list(APPEND SOURCES "src/version.cc" src/version.hh)
 
 # Binary
 add_executable(oakwm         src/main.cc)
-add_executable(oakwm-toolbar src/toolbar.cc src/version.hh src/version.cc)
+add_executable(oakwm-toolbar src/toolbar.cc)
