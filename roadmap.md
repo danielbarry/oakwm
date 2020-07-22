@@ -13,6 +13,8 @@
 
 ## Tasks
 
+**Basic desktop-only:**
+
 * `[x]` Source code building
 * `[x]` Window manager running in VM
 * `[ ]` Clean-up source code
@@ -48,3 +50,36 @@
   * `[ ]` Convert Java JSON config project
   * `[ ]` Pull in JSON strings
   * `[ ]` Conversion of JSON strings
+* `[ ]` Window manager
+  * `[ ]` Remove root background click
+  * `[ ]` Remove session exit
+  * `[ ]` Modernize cursor
+  * `[ ]` Modernize window decoration
+  * `[ ]` Move configuration into JSON config file
+  * `[ ]` Check for config file changes and reload
+* `[ ]` Settings
+  * `[ ]` Window to display setting types
+  * `[ ]` Adjustment of settings updates configuration file
+  * `[ ]` Template settings (min, max, default, value, type, etc)
+
+**Basic desktop and mobile:**
+
+* `[ ]` Detect orientation change
+* `[ ]` Rotate display
+  * `[ ]` Switch orientation of windows
+  * `[ ]` Switch orientation of toolbar
+* `[ ]` Detect mobile mode
+* `[ ]` Virtual keyboard
+* `[ ]` Remove mouse mode
+* `[ ]` Snap window functionality
+* `[ ]` Auto-snap when entering mobile mode
+* `[ ]` Switch between programs
+* `[ ]` Volume
+* `[ ]` Power saving
+  * `[ ]` Perform some actions when in low power scenario
+  * `[ ]` Display brightness
+  * `[ ]` Aeroplane mode (transmitters off)
+
+**Usability:**
+
+* `[ ]` Some automated install process for the window manager onto a system
