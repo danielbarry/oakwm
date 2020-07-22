@@ -32,3 +32,11 @@
   * `[~]` `manager.cc`
   * `[ ]` `rotated.hh`
 * `[ ]` Design user interface
+* `[ ]` Basic toolbar
+  * `[x]` Width of display
+  * `[x]` Always on top
+  * `[x]` Log to terminal
+  * `[x]` Log to disk
+  * `[ ]` Display time
+  * `[ ]` Display battery state
+  * `[ ]` Display connection state
