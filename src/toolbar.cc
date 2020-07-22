@@ -1,5 +1,7 @@
 #include "toolbar.hh"
 
+#include "log.hh"
+
 /**
  * main()
  *
@@ -10,6 +12,7 @@
  * @return The return code of the program.
  **/
 int main(int argc, char **argv){
+  LOG("Starting okawm toolbar...");
   Toolbar* toolbar = new Toolbar();
   /* Exit success */
   return 0;
@@ -19,7 +22,7 @@ Toolbar::Toolbar(){
   /* Create the X connection */
   dis = XOpenDisplay(NULL);
   if(!dis){
-    /* TODO: Handle error. */
+    WARN("Unable to open display, program may crash");
   }
   screen = DefaultScreen(dis);
   /* Get default colours from X11 */
@@ -78,6 +81,7 @@ void Toolbar::loop(){
     /* Do we need to redraw the window? */
     if(event.type == Expose && event.xexpose.count == 0){
       /* TODO: Redraw window information. */
+      LOG("Requested to redraw the window");
     }
     /* Did somebody try to overwrite us? */
     if(event.type == VisibilityNotify){
