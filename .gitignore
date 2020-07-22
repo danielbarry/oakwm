@@ -9,10 +9,3 @@ Makefile
 oakwm
 oakwm-toolbar
 src/git-rev.hh
-
-# Ignore virtual machine files
-.Xauthority-c
-.bash_history
-.local/**
-.vagrant/**
-.viminfo
