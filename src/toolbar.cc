@@ -1,5 +1,7 @@
 #include "toolbar.hh"
 
+#define LOG_NAME "toolbar"
+
 #include "git-rev.hh"
 #include "log.hh"
 

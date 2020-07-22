@@ -4,6 +4,10 @@
 #include <ctime>
 #include <string>
 
+#ifndef LOG_NAME
+  #define LOGNAME "log"
+#endif
+
 #define CLASS() std::string(__FILE__).substr(std::string(__FILE__).find_last_of('/') + 1)
 
 #define CHEADER() printf("[\033[1;33m%lli\033[0m] \033[1;35m%s\033[0m->\033[1;34m%s()\033[0m::\033[1;36m%i\033[0m ", LOG::CURRENT_TIME_NANOS(), CLASS().c_str(), __FUNCTION__, __LINE__)
@@ -48,7 +52,7 @@
 #define WARNF(s,f) {CWARNF(s,f); LOG::WRITE_DISK_LOG(FILENAME(),PWARNF(s,f));}
 #define WARNM(s,m) {CWARNM(s,m); LOG::WRITE_DISK_LOG(FILENAME(),PWARNM(s,m));}
 
-#define FILENAME() ("log-" + std::to_string(LOG::GET_START_TIME_NANOS()) + ".txt").c_str()
+#define FILENAME() (LOG_NAME + std::string("-") + std::to_string(LOG::GET_START_TIME_NANOS()) + ".txt").c_str()
 
 class LOG{
   private:
