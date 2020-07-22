@@ -48,7 +48,7 @@ Toolbar::Toolbar(){
     0,
     0,
     width,
-    16,
+    32,
     0,
     CopyFromParent,
     CopyFromParent,
