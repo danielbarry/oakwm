@@ -119,6 +119,4 @@ void Toolbar::loop(){
 }
 
 void Toolbar::redraw(){
-  char* menu = "[MENU]  |  [SHORT1]  [SHORT2]  |  [DATE]  [TIME]  |  [CPU RAM]  [NETWORK]  [BATTERY]  |  [SETTINGS]  [CONTROL]";
-  XDrawString(dis, win, gc, 2, 12, menu, strlen(menu));
 }
