@@ -43,7 +43,7 @@
   * `[x]` Log git build information
   * `[ ]` Force redraw based on timer
   * `[ ]` Display time
-  * `[ ]` Draw basic icons
+  * `[x]` Draw basic icons
   * `[ ]` Display battery state
   * `[ ]` Display connection state
   * `[ ]` Drop down menu
