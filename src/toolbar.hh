@@ -34,7 +34,14 @@ class Toolbar{
     /**
      * loop()
      *
-     * Main window loop.
+     * Main window loop and handle incoming events.
      **/
     void loop();
+
+    /**
+     * redraw()
+     *
+     * Redraw the window completely.
+     **/
+    void redraw();
 };

@@ -92,8 +92,7 @@ void Toolbar::loop(){
     }
     /* Do we need to redraw the window? */
     if(event.type == Expose && event.xexpose.count == 0){
-      /* TODO: Redraw window information. */
-      LOG("Requested to redraw the window");
+      redraw();
     }
     /* Did somebody try to overwrite us? */
     if(event.type == VisibilityNotify){
@@ -111,7 +110,11 @@ void Toolbar::loop(){
       LOGI("Mouse release x: ", event.xbutton.x);
       LOGI("Mouse release y: ", event.xbutton.y);
     }
-    /* TODO: Handle inputs. */
     /* TODO: Handle main logic. */
   }
+}
+
+void Toolbar::redraw(){
+  char* menu = "[MENU]  |  [SHORT1]  [SHORT2]  |  [DATE]  [TIME]  |  [CPU RAM]  [NETWORK BATTERY]  |  [SETTINGS]  [CONTROL]";
+  XDrawString(dis, win, gc, 2, 12, menu, strlen(menu));
 }
