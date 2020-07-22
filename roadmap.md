@@ -37,6 +37,7 @@
   * `[x]` Always on top
   * `[x]` Log to terminal
   * `[x]` Log to disk
+  * `[x]` Log git build information
   * `[ ]` Display time
   * `[ ]` Display battery state
   * `[ ]` Display connection state
