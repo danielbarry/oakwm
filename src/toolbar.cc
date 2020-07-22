@@ -14,6 +14,7 @@
  **/
 int main(int argc, char **argv){
   /* Dump version information */
+  LOGM("Build Date: ",   STR(BUILD_DATE));
   LOGM("Build Branch: ", STR(GIT_BRANCH_RAW));
   LOGM("Build Hash: ",   STR(GIT_HASH_RAW));
   /* Start toolbar */

@@ -25,7 +25,9 @@ SET(GITREV_TMP ${CMAKE_BINARY_DIR}/${GITREV_BARE_TMP})
 
 add_custom_command(
   OUTPUT ${GITREV_TMP}
-  COMMAND ${CMAKE_COMMAND} -E echo_append "#define GIT_BRANCH_RAW " > ${GITREV_TMP}
+  COMMAND ${CMAKE_COMMAND} -E echo_append "#define BUILD_DATE " > ${GITREV_TMP}
+  COMMAND date >> ${GITREV_TMP}
+  COMMAND ${CMAKE_COMMAND} -E echo_append "#define GIT_BRANCH_RAW " >> ${GITREV_TMP}
   COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD >> ${GITREV_TMP}
   COMMAND ${CMAKE_COMMAND} -E echo_append "#define GIT_HASH_RAW " >> ${GITREV_TMP}
   COMMAND ${GIT_EXECUTABLE} describe --always --dirty --abbrev=40 --match="NoTagWithThisName" >> ${GITREV_TMP}
