@@ -3,6 +3,7 @@
 #define LOG_NAME "toolbar"
 
 #include "git-rev.hh"
+#include "icon.cc"
 #include "log.hh"
 
 /**
@@ -74,6 +75,9 @@ Toolbar::Toolbar(){
   /* Clear the window and bring it on top of the other windows */
   XClearWindow(dis, win);
   XMapRaised(dis, win);
+  /* Generate some icons */
+  icons.emplace_back(new Icon("res/icon-menu.ppm", 0, 0, dis, win, gc));
+  icons.emplace_back(new Icon("res/icon-config.ppm", width - 16, 0, dis, win, gc));
   /* Enter main loop */
   loop();
 }
@@ -119,4 +123,8 @@ void Toolbar::loop(){
 }
 
 void Toolbar::redraw(){
+  /* Loop icons */
+  for(int x = 0; x < icons.size(); x++){
+    icons[x]->draw(dis, win, gc);
+  }
 }
