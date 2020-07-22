@@ -1,7 +1,7 @@
 #include "toolbar.hh"
 
 #include "log.hh"
-#include "version.cc"
+#include "version.hh"
 
 /**
  * main()
