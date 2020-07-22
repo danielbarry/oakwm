@@ -46,7 +46,14 @@ Toolbar::Toolbar(){
   /* Set window properties */
   XSetWindowBackground(dis, win, white);
   /* Select allowed input methods */
-  XSelectInput(dis, win, ExposureMask | ButtonPressMask | KeyPressMask);
+  XSelectInput(
+    dis,
+    win,
+    ExposureMask    |
+    ButtonPressMask |
+    KeyPressMask    |
+    VisibilityChangeMask
+  );
   /* Create graphics context */
   gc = XCreateGC(dis, win, 0, 0);
   /* Set window colours */
@@ -70,7 +77,13 @@ void Toolbar::loop(){
     XNextEvent(dis, &event);
     /* Do we need to redraw the window? */
     if(event.type == Expose && event.xexpose.count == 0){
-      redraw();
+      /* TODO: Redraw window information. */
+    }
+    /* Did somebody try to overwrite us? */
+    if(event.type == VisibilityNotify){
+      /* TODO: This is a hack, two or more windows doing this would fight. */
+      XRaiseWindow(dis, win);
+      XFlush(dis);
     }
     /* TODO: Handle inputs. */
     /* TODO: Handle main logic. */
