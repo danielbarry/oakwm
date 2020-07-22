@@ -18,6 +18,9 @@ int main(int argc, char **argv){
 Toolbar::Toolbar(){
   /* Create the X connection */
   dis = XOpenDisplay(NULL);
+  if(!dis){
+    /* TODO: Handle error. */
+  }
   screen = DefaultScreen(dis);
   /* Get default colours from X11 */
   unsigned long black = BlackPixel(dis, screen);
