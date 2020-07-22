@@ -1,7 +1,7 @@
 #include "toolbar.hh"
 
+#include "git-rev.hh"
 #include "log.hh"
-#include "version.hh"
 
 /**
  * main()
@@ -14,9 +14,8 @@
  **/
 int main(int argc, char **argv){
   /* Dump version information */
-  LOGM("Build SHA1: ", Version::GIT_SHA1.c_str());
-  LOGM("Build Date: ", Version::GIT_DATE.c_str());
-  LOGM("Build Subject: ", Version::GIT_COMMIT_SUBJECT.c_str());
+  LOGM("Build Branch: ", STR(GIT_BRANCH_RAW));
+  LOGM("Build Hash: ",   STR(GIT_HASH_RAW));
   /* Start toolbar */
   LOG("Starting okawm toolbar...");
   Toolbar* toolbar = new Toolbar();
