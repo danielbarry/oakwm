@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
   # Remove need for password
   config.ssh.insert_key = false
   # Sync directories of interest
-  config.vm.synced_folder "./", "/home/vagrant/"
+  config.vm.synced_folder "./", "/home/vagrant/dev"
   # Setup the environment
-  config.vm.provision "shell", inline: "cd /home/vagrant/; bash setup.sh", privileged: false
+  config.vm.provision "shell", inline: "cd /home/vagrant/dev; bash setup.sh", privileged: false
 end

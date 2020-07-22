@@ -17,6 +17,7 @@
 
 * `[x]` Source code building
 * `[x]` Window manager running in VM
+* `[x]` Run window manager without root
 * `[ ]` Clean-up source code
   * `[ ]` `border.cc`
   * `[ ]` `client.cc`
