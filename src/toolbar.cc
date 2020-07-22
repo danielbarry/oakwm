@@ -75,7 +75,10 @@ Toolbar::Toolbar(){
 }
 
 Toolbar::~Toolbar(){
-  /* Do nothing */
+  XFreeGC(dis, gc);
+  XDestroyWindow(dis, win);
+  XCloseDisplay(dis);
+  exit(1);
 }
 
 void Toolbar::loop(){
