@@ -38,6 +38,13 @@
   * `[x]` Log to terminal
   * `[x]` Log to disk
   * `[x]` Log git build information
+  * `[ ]` Force redraw based on timer
   * `[ ]` Display time
+  * `[ ]` Draw basic icons
   * `[ ]` Display battery state
   * `[ ]` Display connection state
+  * `[ ]` Drop down menu
+* `[ ]` Configuration file
+  * `[ ]` Convert Java JSON config project
+  * `[ ]` Pull in JSON strings
+  * `[ ]` Conversion of JSON strings
