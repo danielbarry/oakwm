@@ -33,6 +33,7 @@ Toolbar::Toolbar(){
     WARN("Unable to open display, program may crash");
   }
   screen = DefaultScreen(dis);
+  int width = XWidthOfScreen(ScreenOfDisplay(dis, screen));
   /* Get default colours from X11 */
   unsigned long black = BlackPixel(dis, screen);
   unsigned long white = WhitePixel(dis, screen);
@@ -42,10 +43,10 @@ Toolbar::Toolbar(){
   /* Create the window for the given display */
   win = XCreateWindow(
     dis,
-    RootWindow(dis, 0),
+    RootWindow(dis, screen),
     0,
     0,
-    XWidthOfScreen(ScreenOfDisplay(dis, 0)),
+    width,
     16,
     0,
     CopyFromParent,
