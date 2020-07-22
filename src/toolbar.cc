@@ -35,7 +35,7 @@ Toolbar::Toolbar(){
     0,
     0,
     XWidthOfScreen(ScreenOfDisplay(dis, 0)),
-    32,
+    16,
     0,
     CopyFromParent,
     CopyFromParent,
