@@ -86,6 +86,10 @@ void Toolbar::loop(){
   while(true){
     /* Get window events */
     XNextEvent(dis, &event);
+    /* Check if an event was registered */
+    if(!event.type){
+      WARN("Unhandled event triggered");
+    }
     /* Do we need to redraw the window? */
     if(event.type == Expose && event.xexpose.count == 0){
       /* TODO: Redraw window information. */
