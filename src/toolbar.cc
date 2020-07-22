@@ -25,10 +25,26 @@ Toolbar::Toolbar(){
   /* Get default colours from X11 */
   unsigned long black = BlackPixel(dis, screen);
   unsigned long white = WhitePixel(dis, screen);
+  /* Setup window attributes (remove border) */
+  XSetWindowAttributes attr;
+  attr.override_redirect = 1;
   /* Create the window for the given display */
-  win = XCreateSimpleWindow(dis, DefaultRootWindow(dis), 0, 0, 200, 300, 5, white, black);
+  win = XCreateWindow(
+    dis,
+    RootWindow(dis, 0),
+    0,
+    0,
+    XWidthOfScreen(ScreenOfDisplay(dis, 0)),
+    32,
+    0,
+    CopyFromParent,
+    CopyFromParent,
+    CopyFromParent,
+    CWOverrideRedirect,
+    &attr
+  );
   /* Set window properties */
-  XSetStandardProperties(dis, win, "My Window", "HI!", None, NULL, 0, NULL);
+  XSetWindowBackground(dis, win, white);
   /* Select allowed input methods */
   XSelectInput(dis, win, ExposureMask | ButtonPressMask | KeyPressMask);
   /* Create graphics context */
