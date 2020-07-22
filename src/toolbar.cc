@@ -76,8 +76,13 @@ Toolbar::Toolbar(){
   XClearWindow(dis, win);
   XMapRaised(dis, win);
   /* Generate some icons */
-  icons.emplace_back(new Icon("res/icon-menu.ppm", 0, 0, dis, win, gc));
-  icons.emplace_back(new Icon("res/icon-config.ppm", width - 16, 0, dis, win, gc));
+  icons.emplace_back(new Icon("res/plus.ppm", 0, 0, dis, win, gc));
+  icons.emplace_back(new Icon("res/terminal.ppm", 32, 0, dis, win, gc));
+  icons.emplace_back(new Icon("res/wifi.ppm", width - 160, 0, dis, win, gc));
+  icons.emplace_back(new Icon("res/volume-up.ppm", width - 128, 0, dis, win, gc));
+  icons.emplace_back(new Icon("res/battery-full.ppm", width - 96, 0, dis, win, gc));
+  icons.emplace_back(new Icon("res/wrench.ppm", width - 64, 0, dis, win, gc));
+  icons.emplace_back(new Icon("res/power.ppm", width - 32, 0, dis, win, gc));
   /* Enter main loop */
   loop();
 }
