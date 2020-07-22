@@ -15,84 +15,31 @@ lightweight experience.
 
 oakwm provides:
 
-* Decorative frames for your windows.
-* The ability to move, resize, hide and restore windows.
-* No icons.
-* No configurable root menus, buttons or mouse or keyboard bindings.
-* No virtual desktop, toolbars or integrated applications.
+* Decorative frames for your windows
+* The ability to move, resize, hide and restore windows
+* Basic icons
+* No buttons or mouse or keyboard bindings
+* No virtual desktop or integrated applications (only a lightweight toolbar)
 
 **See the [roadmap](roadmap.md) for more information.**
 
 ## Building oakwm
 
-**TODO:** Update this section.
-
 You will need a Unix machine, X libraries and a C++ compiler such as
-gcc.  You will also need a mouse, with at least one button.  Your X
+gcc. You will also need a mouse, with at least one button. Your X
 server and libraries must be R4 or newer and must support the Shape
-extension.  wm2 does NOT support multi-screen displays, because I
-don't have anything to test multi-screen code on.
+extension. oakwm does NOT support multi-screen displays, because it's currently
+outside the scope of the project.
 
-wm2 makes relatively heavy demands on the performance of your X
-server, because of the use of shaped windows, but it shouldn't place
-too much of a load on other aspects of your system.
+See the *testing* section for recommended information on building.
 
-Inspect the file Config.h.  If any of the settings (fonts, colours and
-"xterm" application name) in this file are unlikely to work with your
-system, change them.  Ensure that CONFIG_NASTY_FONT is set to
-something which is unlikely not to be found.
-
-Edit the Makefile to suit the requirements of your system, and run
-"make depend" followed by "make".  This should build wm2.  On certain
-systems you may need to edit the source to overcome problems with the
-location of non-POSIX functions such as putenv() and select().
+The JSON configuration file is the main method for making changes to the
+interface, please read the documentation *before* making changes as you may
+cause the X server to crash otherwise.
 
 ## Using oakwm
 
 **TODO:** Update this section.
-
-To run wm2, make sure you're not already running a window manager,
-make sure the DISPLAY variable is correctly set, and then execute the
-file "wm2".  There are no command-line options or X resources, and
-there is no start-up file.  If your X server doesn't support the Shape
-extension, wm2 will exit (and will never work on your server); if it
-can't find the required fonts or allocate the required colours, it
-will also exit (but you should be able to fix this by changing the
-definitions in Config.h and recompiling).
-
-Available window manipulations are:
-
-* To focus a window: depends on the focus policy you selected
-in Config.h before compiling.  See "Focus policy", below.
-* To raise a window: click on its tab or frame, unless you have
-auto-raise on focus set in Config.h.
-* To move a window: make sure it's in focus, then click and drag
-on its tab.
-* To hide a window: make sure it's in focus, then click on the
-button at the top of its tab.
-* To recover a hidden window: click left button on the root
-window for the root menu, and choose the window you want.
-* To start a new xterm: use the first item on root menu ("New").
-* To delete a window: make sure it's in focus, click on the
-button on the tab, hold the mouse button for at least a
-second and a half until the cursor changes to a cross, then
-release.  (I know, it's not very easy.  On the other hand,
-things like Windows-95 tend to obscure the fact that most
-windows already have a perfectly good Close option.  If the
-default delay doesn't suit you, change it in Config.h and
-recompile.)
-* To resize a window: make sure it's in focus, then click and
-drag on its bottom-right corner.  For a constrained resize,
-click and drag on the bottom-left or top-right corner of
-the enclosing window frame.
-* To flip around amongst the windows on-screen: click with the right
-mouse button on the root window or on any window's frame or tab.
-* To exit from wm2: move the mouse pointer to the very edge of the
-screen at the extreme lower-right corner, and click left button on
-the root window for the root menu.  The menu should have an extra
-option labelled "Exit wm2"; select this.
-
-All move and resize operations are opaque.
 
 ## Testing
 
@@ -118,39 +65,6 @@ VirtualBox manager to open the GUI (recommended for testing the UI).
 Login for vagrant is `vagrant` (username and password). Once in:
 
     cd; sudo startx
-
-## Focus policy
-
-**TODO:** Update this section.
-
-Config.h contains settings for focus policy.  There are three things
-you can define to either True or False: CONFIG_CLICK_TO_FOCUS,
-CONFIG_RAISE_ON_FOCUS and CONFIG_AUTO_RAISE.  The first two are
-connected: together they define a focus policy.  The third is a
-separate focus policy on its own and will only work if the first two
-are both False.  CONFIG_AUTO_RAISE differs from
-(!CONFIG_CLICK_TO_FOCUS && CONFIG_RAISE_ON_FOCUS) only in that it
-provides a short delay before raising each window.  The delay is also
-definable in Config.h.
-
-## Pixmaps
-
-**TODO:** Update this section.
-
-This fourth release of wm2 no longer supports frame background
-pixmaps.  If you want them, consider using wmx (available from the
-same place as wm2) instead.
-
-## xterm
-
-**TODO:** Update this section.
-
-Some versions of xterm and rxvt run badly with wm2.  If you use xterm
-and find that it refreshes the window excessively slowly, you might
-like to try experimenting with a different terminal emulation program.
-I think it might help to ensure that the scrollbar is on the
-right-hand side of the rxvt window and is thick enough that wmx's
-resize handle doesn't obscure any of the text area.
 
 ## Credits
 
@@ -183,4 +97,8 @@ long as you retain the original copyrights as appropriate.
 
 ## Bugs
 
-**TODO:** Write this section.
+When running oakwm and coming across bugs, please attach your relevant logfile
+(usually `.txt`). It provides useful information such as the build date,
+branch, commit hash and various debugging messages.
+
+Bugs can be submitted using GitHub's "issues" feature.
