@@ -57,9 +57,9 @@ Toolbar::Toolbar(){
   XSelectInput(
     dis,
     win,
-    ExposureMask    |
-    ButtonPressMask |
-    KeyPressMask    |
+    ButtonPressMask   |
+    ButtonReleaseMask |
+    ExposureMask      |
     VisibilityChangeMask
   );
   /* Create graphics context */
@@ -96,6 +96,16 @@ void Toolbar::loop(){
       /* TODO: This is a hack, two or more windows doing this would fight. */
       XRaiseWindow(dis, win);
       XFlush(dis);
+    }
+    /* Handle mouse presses */
+    if(event.type == ButtonPress){
+      LOGI("Mouse press x: ", event.xbutton.x);
+      LOGI("Mouse press y: ", event.xbutton.y);
+    }
+    /* Handle mouse releases */
+    if(event.type == ButtonRelease){
+      LOGI("Mouse release x: ", event.xbutton.x);
+      LOGI("Mouse release y: ", event.xbutton.y);
     }
     /* TODO: Handle inputs. */
     /* TODO: Handle main logic. */
