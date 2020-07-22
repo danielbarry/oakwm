@@ -1,6 +1,7 @@
 #include "toolbar.hh"
 
 #include "log.hh"
+#include "version.hh"
 
 /**
  * main()
@@ -12,6 +13,11 @@
  * @return The return code of the program.
  **/
 int main(int argc, char **argv){
+  /* Dump version information */
+  LOGM("Build SHA1: ", Version::GIT_SHA1.c_str());
+  LOGM("Build Date: ", Version::GIT_DATE.c_str());
+  LOGM("Build Subject: ", Version::GIT_COMMIT_SUBJECT.c_str());
+  /* Start toolbar */
   LOG("Starting okawm toolbar...");
   Toolbar* toolbar = new Toolbar();
   /* Exit success */
