@@ -5,12 +5,15 @@
 
 #include "log.hh"
 
-Icon::Icon(std::string path, int x, int y, Display* dis, Window win, GC gc){
+Icon::Icon(std::string path, int x, int y, bool inter, Display* dis, Window win, GC gc){
   destX = x;
   destY = y;
+  interact = inter;
   width = -1;
   height = -1;
   img = NULL;
+  focus = false;
+  active = false;
   /* Read pixels out of the file */
   std::ifstream file(path);
   std::string fmt;
@@ -20,7 +23,7 @@ Icon::Icon(std::string path, int x, int y, Display* dis, Window win, GC gc){
   while(std::getline(file, line)){
     int s = -1;
     int e = -1;
-    if(!line.empty() && !fmt.empty() && width >= 0 && height >=0 && depth >= 0){
+    if(!line.empty() && !fmt.empty() && width >= 0 && height >= 0 && depth >= 0){
       if(line.size() != width * height * 3){
         WARN("Bad data section detected");
       }
@@ -108,6 +111,42 @@ Icon::~Icon(){
   XFree(img);
 }
 
+bool Icon::interactive(){
+  return interact;
+}
+
+bool Icon::insideBounds(int x, int y){
+  /* NOTE: X computed first as it's the most likely to fail. */
+  return x >= destX        &&
+         x < destX + width &&
+         y >= destY        &&
+         y < destY + height;
+}
+
+void Icon::setFocused(bool state){
+  active = false;
+  focus = state;
+}
+
+void Icon::setActive(bool state){
+  focus = false;
+  active = state;
+}
+
 void Icon::draw(Display* dis, Window win, GC gc){
   XPutImage(dis, win, gc, img, 0, 0, destX, destY, width, height);
+  /* Draw over icon */
+  if(focus || active){
+    int i = destX + width - 1;
+    int j = destY + height - 1;
+    if(focus){
+      XSetForeground(dis, gc, 0x00FF00);
+    }else if(active){
+      XSetForeground(dis, gc, 0xFF0000);
+    }
+    XDrawLine(dis, win, gc, destX, destY, i    , destY);
+    XDrawLine(dis, win, gc, i    , destY, i    , j    );
+    XDrawLine(dis, win, gc, i    , j    , destX, j    );
+    XDrawLine(dis, win, gc, destX, j    , destX, destY);
+  }
 }

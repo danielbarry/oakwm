@@ -65,6 +65,7 @@ Toolbar::Toolbar(){
     ButtonPressMask   |
     ButtonReleaseMask |
     ExposureMask      |
+    PointerMotionMask |
     VisibilityChangeMask
   );
   /* Create graphics context */
@@ -76,13 +77,13 @@ Toolbar::Toolbar(){
   XClearWindow(dis, win);
   XMapRaised(dis, win);
   /* Generate some icons */
-  icons.emplace_back(new Icon("res/plus.ppm", 0, 0, dis, win, gc));
-  icons.emplace_back(new Icon("res/terminal.ppm", 32, 0, dis, win, gc));
-  icons.emplace_back(new Icon("res/wifi.ppm", width - 160, 0, dis, win, gc));
-  icons.emplace_back(new Icon("res/volume-up.ppm", width - 128, 0, dis, win, gc));
-  icons.emplace_back(new Icon("res/battery-full.ppm", width - 96, 0, dis, win, gc));
-  icons.emplace_back(new Icon("res/wrench.ppm", width - 64, 0, dis, win, gc));
-  icons.emplace_back(new Icon("res/power.ppm", width - 32, 0, dis, win, gc));
+  icons.emplace_back(new Icon("res/plus.ppm", 0, 0, true, dis, win, gc));
+  icons.emplace_back(new Icon("res/terminal.ppm", 32, 0, true, dis, win, gc));
+  icons.emplace_back(new Icon("res/wifi.ppm", width - 160, 0, true, dis, win, gc));
+  icons.emplace_back(new Icon("res/volume-up.ppm", width - 128, 0, true, dis, win, gc));
+  icons.emplace_back(new Icon("res/battery-full.ppm", width - 96, 0, false, dis, win, gc));
+  icons.emplace_back(new Icon("res/wrench.ppm", width - 64, 0, true, dis, win, gc));
+  icons.emplace_back(new Icon("res/power.ppm", width - 32, 0, true, dis, win, gc));
   /* Enter main loop */
   loop();
 }
@@ -99,29 +100,53 @@ void Toolbar::loop(){
   while(true){
     /* Get window events */
     XNextEvent(dis, &event);
-    /* Check if an event was registered */
-    if(!event.type){
-      WARN("Unhandled event triggered");
+    /* Check and handle event type */
+    int mouseX = -1;
+    int mouseY = -1;
+    int press = false;
+    int type = event.type;
+    switch(type){
+      case Expose :
+        if(event.xexpose.count == 0){
+          redraw();
+        }
+        break;
+      case VisibilityNotify :
+        /* TODO: This is a hack, two or more windows doing this would fight. */
+        XRaiseWindow(dis, win);
+        XFlush(dis);
+        break;
+      case ButtonPress :
+      case ButtonRelease :
+        mouseX = event.xbutton.x;
+        mouseY = event.xbutton.y;
+        press = type == ButtonPress;
+        break;
+      case MotionNotify :
+        mouseX = event.xmotion.x;
+        mouseY = event.xmotion.y;
+        press = event.xmotion.state != 0;
+        break;
+      default :
+        WARN("Unhandled event triggered");
+        break;
     }
-    /* Do we need to redraw the window? */
-    if(event.type == Expose && event.xexpose.count == 0){
+    /* Update icon states if mouse event occurred */
+    if(mouseX >= 0 && mouseY >= 0){
+      for(int i = 0; i < icons.size(); i++){
+        if(icons[i]->interactive() && icons[i]->insideBounds(mouseX, mouseY)){
+          /* Is it hover of press related? */
+          if(type == MotionNotify && !press){
+            icons[i]->setFocused(true);
+          }else{
+            icons[i]->setActive(press);
+          }
+        }else{
+          icons[i]->setFocused(false);
+        }
+      }
+      /* As we moused over something, redraw to be safe */
       redraw();
-    }
-    /* Did somebody try to overwrite us? */
-    if(event.type == VisibilityNotify){
-      /* TODO: This is a hack, two or more windows doing this would fight. */
-      XRaiseWindow(dis, win);
-      XFlush(dis);
-    }
-    /* Handle mouse presses */
-    if(event.type == ButtonPress){
-      LOGI("Mouse press x: ", event.xbutton.x);
-      LOGI("Mouse press y: ", event.xbutton.y);
-    }
-    /* Handle mouse releases */
-    if(event.type == ButtonRelease){
-      LOGI("Mouse release x: ", event.xbutton.x);
-      LOGI("Mouse release y: ", event.xbutton.y);
     }
     /* TODO: Handle main logic. */
   }
