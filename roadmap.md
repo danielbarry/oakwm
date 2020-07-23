@@ -41,9 +41,11 @@
   * `[x]` Log to terminal
   * `[x]` Log to disk
   * `[x]` Log git build information
+  * `[ ]` Set window font
   * `[ ]` Force redraw based on timer
   * `[ ]` Display time
   * `[x]` Draw basic icons
+  * `[x]` Icon hover and click
   * `[ ]` Display battery state
   * `[ ]` Display connection state
   * `[ ]` Drop down menu
