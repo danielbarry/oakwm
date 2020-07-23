@@ -140,9 +140,9 @@ void Icon::draw(Display* dis, Window win, GC gc){
     int i = destX + width - 1;
     int j = destY + height - 1;
     if(focus){
-      XSetForeground(dis, gc, 0x00FF00);
+      XSetForeground(dis, gc, 0x00FFFF);
     }else if(active){
-      XSetForeground(dis, gc, 0xFF0000);
+      XSetForeground(dis, gc, 0x0000FF);
     }
     XDrawLine(dis, win, gc, destX, destY, i    , destY);
     XDrawLine(dis, win, gc, i    , destY, i    , j    );
