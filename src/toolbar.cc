@@ -90,13 +90,29 @@ Toolbar::Toolbar(char* filename){
   XClearWindow(dis, win);
   XMapRaised(dis, win);
   /* Generate some icons */
-  icons.emplace_back(new Icon("res/plus.ppm", 0, 0, true, dis, win, gc));
-  icons.emplace_back(new Icon("res/terminal.ppm", 32, 0, true, dis, win, gc));
-  icons.emplace_back(new Icon("res/wifi.ppm", width - 160, 0, true, dis, win, gc));
-  icons.emplace_back(new Icon("res/volume-up.ppm", width - 128, 0, true, dis, win, gc));
-  icons.emplace_back(new Icon("res/battery-full.ppm", width - 96, 0, false, dis, win, gc));
-  icons.emplace_back(new Icon("res/wrench.ppm", width - 64, 0, true, dis, win, gc));
-  icons.emplace_back(new Icon("res/power.ppm", width - 32, 0, true, dis, win, gc));
+  int leftOff = 0;
+  int rightOff = width;
+  for(int x = 0; x < json->get("toolbar")->get("icons")->length(); x++){
+    JSON* iCfg = json->get("toolbar")->get("icons")->get(x);
+    bool alignLeft = iCfg->get("align")->value("left").compare("left") == 0;
+    Icon* icon = new Icon(
+      iCfg->get("image")->value(""),
+      0,
+      0,
+      iCfg->get("interactive")->value("false").compare("true") == 0,
+      dis,
+      win,
+      gc
+    );
+    if(alignLeft){
+      icon->setXY(leftOff, 0);
+      leftOff += icon->getWidth();
+    }else{
+      rightOff -= icon->getWidth();
+      icon->setXY(rightOff, 0);
+    }
+    icons.emplace_back(icon);
+  }
   /* Enter main loop */
   loop();
 }
