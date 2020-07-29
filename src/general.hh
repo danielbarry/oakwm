@@ -42,7 +42,7 @@ typedef char Boolean;
     (void)sigaction((x), &sAct, NULL); \
   } while (0)
 
-#include "config.hh"
+#include "settings.hh"
 
 class Atoms {
 public:
