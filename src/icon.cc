@@ -111,6 +111,19 @@ Icon::~Icon(){
   XFree(img);
 }
 
+void Icon::setXY(int x, int y){
+  destX = x;
+  destY = y;
+}
+
+int Icon::getWidth(){
+  return width;
+}
+
+int Icon::getHeight(){
+  return height;
+}
+
 bool Icon::interactive(){
   return interact;
 }

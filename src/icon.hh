@@ -43,6 +43,34 @@ class Icon{
      **/
     ~Icon();
 
+     /**
+      * setXY()
+      *
+      * Set the X and Y offset positions for drawing.
+      *
+      * @param x The X offset.
+      * @param y The Y offset.
+      **/
+     void setXY(int x, int y);
+
+    /**
+     * getWidth()
+     *
+     * Get the width of the icon.
+     *
+     * @return The width of the icon.
+     **/
+    int getWidth();
+
+    /**
+     * getHeight()
+     *
+     * Get the height of the icon.
+     *
+     * @return The height of the icon.
+     **/
+    int getHeight();
+
     /**
      * interactive()
      *
