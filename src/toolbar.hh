@@ -1,6 +1,7 @@
 #pragma once
 
 #include "icon.hh"
+#include "json.hh"
 
 #include <vector>
 #include <X11/Xlib.h>
@@ -20,6 +21,7 @@
  **/
 class Toolbar{
   private:
+    JSON* json;
     Display* dis;
     int screen;
     Window win;
@@ -31,8 +33,10 @@ class Toolbar{
      * Toolbar()
      *
      * Construct the toolbar and register with X11 where appropriate.
+     *
+     * @param filename The location of the configuration file, otherwise NULL.
      **/
-    Toolbar();
+    Toolbar(char* filename);
 
     /**
      * ~Toolbar()

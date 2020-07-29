@@ -20,14 +20,27 @@ int main(int argc, char **argv){
   LOGM("Build Date: ",   STR(BUILD_DATE));
   LOGM("Build Branch: ", STR(GIT_BRANCH_RAW));
   LOGM("Build Hash: ",   STR(GIT_HASH_RAW));
+  /* Check command line parameters */
+  char* config = NULL;
+  if(argc == 2){
+    config = argv[1];
+  }
   /* Start toolbar */
   LOG("Starting okawm toolbar...");
-  Toolbar* toolbar = new Toolbar();
+  Toolbar* toolbar = new Toolbar(config);
   /* Exit success */
   return 0;
 }
 
-Toolbar::Toolbar(){
+Toolbar::Toolbar(char* filename){
+  /* Get settings if provided */
+  if(filename != NULL){
+    LOG("Loading configuration...");
+    json = JSON::build(filename);
+  }else{
+    LOG("No configuration provided");
+    json = new JSON("{}");
+  }
   /* Create the X connection */
   dis = XOpenDisplay(NULL);
   if(!dis){
@@ -48,7 +61,7 @@ Toolbar::Toolbar(){
     0,
     0,
     width,
-    32,
+    std::atoi(json->get("toolbar")->get("height")->value("32").c_str()),
     0,
     CopyFromParent,
     CopyFromParent,
