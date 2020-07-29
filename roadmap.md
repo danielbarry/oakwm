@@ -18,7 +18,7 @@
 * `[x]` Source code building
 * `[x]` Window manager running in VM
 * `[x]` Run window manager without root
-* `[ ]` Clean-up source code
+* `[~]` Clean-up source code
   * `[ ]` `border.cc`
   * `[ ]` `client.cc`
   * `[ ]` `cursors.hh`
@@ -35,7 +35,7 @@
   * `[~]` `manager.cc`
   * `[ ]` `rotated.hh`
 * `[ ]` Design user interface
-* `[ ]` Basic toolbar
+* `[~]` Basic toolbar
   * `[x]` Width of display
   * `[x]` Always on top
   * `[x]` Log to terminal
@@ -49,8 +49,8 @@
   * `[ ]` Display battery state
   * `[ ]` Display connection state
   * `[ ]` Drop down menu
-* `[ ]` Configuration file
-  * `[ ]` Convert Java JSON config project
+* `[~]` Configuration file
+  * `[x]` Convert Java JSON config project
   * `[ ]` Pull in JSON strings
   * `[ ]` Conversion of JSON strings
 * `[ ]` Window manager
