@@ -1,6 +1,6 @@
 {
   "toolbar": {
-    /* NOTE: Order matters - icons aligned right are displayed backwards. */
+    // NOTE: Order matters - icons aligned right are displayed backwards.
     "icons" : [
       { "align": "left",  "image": "res/plus.ppm",         "interactive": "true"  },
       { "align": "left",  "image": "res/terminal.ppm",     "interactive": "true"  },
