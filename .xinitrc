@@ -1,6 +1,6 @@
 #!/bin/sh
 cd /home/vagrant/dev
-./oakwm-toolbar &
+./oakwm-toolbar cfg/default.json &
 xclock -geometry 10x5-50-50 -d -brief -twentyfour -padding 2 &
 xterm  -geometry 10x5+0+20 -e "watch -d -t --interval=10 \"ip -o a | cut -d' ' -f2\"" &
 xterm  -geometry 60x1-40+20 -e "watch -d -t --interval=10 acpi -b" &
