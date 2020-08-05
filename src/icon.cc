@@ -159,9 +159,6 @@ void Icon::draw(Display* dis, Window win, GC gc){
     }else if(active){
       XSetForeground(dis, gc, 0x0000FF);
     }
-    XDrawLine(dis, win, gc, destX, destY, i    , destY);
-    XDrawLine(dis, win, gc, i    , destY, i    , j    );
-    XDrawLine(dis, win, gc, i    , j    , destX, j    );
-    XDrawLine(dis, win, gc, destX, j    , destX, destY);
+    XDrawRectangle(dis, win, gc, destX, destY, width - 1, height - 1);
   }
 }
