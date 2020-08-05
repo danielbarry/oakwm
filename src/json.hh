@@ -162,6 +162,8 @@ class JSON{
       while(std::getline(file, line)){
         json += line;
       }
+      /* Close the file to reserve resources */
+      file.close();
       /* Parse from root */
       return new JSON(json);
     }

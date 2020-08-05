@@ -81,6 +81,8 @@ Icon::Icon(std::string path, int x, int y, bool inter, Display* dis, Window win,
       }
     }
   }
+  /* Close the file to reserve resources */
+  file.close();
   /* Sanity check input */
   if(fmt.compare("P6") != 0){
     WARN("Incorrect image format, icon may be corrupt");
