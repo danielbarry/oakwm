@@ -1,6 +1,11 @@
 {
   "toolbar": {
     // NOTE: Order matters - icons aligned right are displayed backwards.
+    "colours": {
+      "background": "FFFFFF",
+      "foreground": "000000"
+    },
+    "height": "32",
     "icons" : [
       { "align": "left",  "image": "res/plus.ppm",         "interactive": "true"  },
       { "align": "left",  "image": "res/terminal.ppm",     "interactive": "true"  },
@@ -10,7 +15,6 @@
       { "align": "right", "image": "res/volume-up.ppm",    "interactive": "true"  },
       { "align": "right", "image": "res/wifi.ppm",         "interactive": "true"  }
     ],
-    "height": "32",
     "modifiers": [
       { "name": "active", "mask": "00FFFF" },
       { "name": "focus",  "mask": "0000FF" }

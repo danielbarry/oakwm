@@ -50,8 +50,14 @@ Toolbar::Toolbar(char* filename){
   screen = DefaultScreen(dis);
   int width = XWidthOfScreen(ScreenOfDisplay(dis, screen));
   /* Get default colours from X11 */
-  unsigned long black = BlackPixel(dis, screen);
-  unsigned long white = WhitePixel(dis, screen);
+  unsigned long background = Util::strToLong(
+    json->get("colours")->get("background")->value("FFFFFF").c_str(),
+    16
+  );
+  unsigned long foreground = Util::strToLong(
+    json->get("colours")->get("foreground")->value("000000").c_str(),
+    16
+  );
   /* Setup window attributes (remove border) */
   XSetWindowAttributes attr;
   attr.override_redirect = 1;
@@ -71,7 +77,7 @@ Toolbar::Toolbar(char* filename){
     &attr
   );
   /* Set window properties */
-  XSetWindowBackground(dis, win, white);
+  XSetWindowBackground(dis, win, background);
   /* Select allowed input methods */
   XSelectInput(
     dis,
@@ -85,8 +91,8 @@ Toolbar::Toolbar(char* filename){
   /* Create graphics context */
   gc = XCreateGC(dis, win, 0, 0);
   /* Set window colours */
-  XSetBackground(dis, gc, white);
-  XSetForeground(dis, gc, black);
+  XSetBackground(dis, gc, background);
+  XSetForeground(dis, gc, foreground);
   /* Clear the window and bring it on top of the other windows */
   XClearWindow(dis, win);
   XMapRaised(dis, win);
