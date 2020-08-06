@@ -26,7 +26,13 @@ class Toolbar{
     int screen;
     Window win;
     GC gc;
+    int width;
+    int height;
+    unsigned long background;
+    unsigned long foreground;
     std::vector<Icon*> icons;
+    XFontStruct* font;
+    char tBuff[16];
 
   public:
     /**

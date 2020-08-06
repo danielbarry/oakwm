@@ -7,6 +7,8 @@
 #include "log.hh"
 #include "util.hh"
 
+#include <ctime>
+
 /**
  * main()
  *
@@ -48,13 +50,14 @@ Toolbar::Toolbar(char* filename){
     WARN("Unable to open display, program may crash");
   }
   screen = DefaultScreen(dis);
-  int width = XWidthOfScreen(ScreenOfDisplay(dis, screen));
+  width = XWidthOfScreen(ScreenOfDisplay(dis, screen));
+  height = std::atoi(json->get("toolbar")->get("height")->value("32").c_str());
   /* Get default colours from X11 */
-  unsigned long background = Util::strToLong(
+  background = Util::strToLong(
     json->get("colours")->get("background")->value("FFFFFF").c_str(),
     16
   );
-  unsigned long foreground = Util::strToLong(
+  foreground = Util::strToLong(
     json->get("colours")->get("foreground")->value("000000").c_str(),
     16
   );
@@ -68,7 +71,7 @@ Toolbar::Toolbar(char* filename){
     0,
     0,
     width,
-    std::atoi(json->get("toolbar")->get("height")->value("32").c_str()),
+    height,
     0,
     CopyFromParent,
     CopyFromParent,
@@ -129,6 +132,16 @@ Toolbar::Toolbar(char* filename){
     for(int z = 0; z < icons.size(); z++){
       icons[z]->addModifier(name, mask, dis);
     }
+  }
+  /* Load font for text */
+  font = XLoadQueryFont(
+    dis,
+    json->get("toolbar")->get("font")->value("fixed").c_str()
+  );
+  if(font != 0){
+    XSetFont(dis, gc, font->fid);
+  }else{
+    WARN("Unable to load font");
   }
   /* Enter main loop */
   loop();
@@ -199,8 +212,40 @@ void Toolbar::loop(){
 }
 
 void Toolbar::redraw(){
+  /* Clear previous date string */
+  int timeWidth = XTextWidth(font, tBuff, strlen(tBuff));
+  int timeHeight = font->ascent + font->descent;
+  XSetForeground(dis, gc, background);
+  XFillRectangle(
+    dis,
+    win,
+    gc,
+    (width / 2) - (timeWidth / 2),
+    0,
+    timeWidth,
+    height
+  );
+  XSetForeground(dis, gc, foreground);
   /* Loop icons */
   for(int x = 0; x < icons.size(); x++){
     icons[x]->draw(dis, win, gc);
   }
+  /* Get time string */
+  time_t rawTime;
+  struct tm* tInfo;
+  time(&rawTime);
+  tInfo = localtime(&rawTime);
+  strftime(tBuff, sizeof(tBuff), "%d %b %R", tInfo);
+  /* Draw time */
+  timeWidth = XTextWidth(font, tBuff, strlen(tBuff));
+  timeHeight = font->ascent + font->descent;
+  XDrawString(
+    dis,
+    win,
+    gc,
+    (width / 2) - (timeWidth / 2),
+    (height / 2) + (timeHeight / 2),
+    tBuff,
+    strlen(tBuff)
+  );
 }
