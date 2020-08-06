@@ -10,6 +10,10 @@
       { "align": "right", "image": "res/volume-up.ppm",    "interactive": "true"  },
       { "align": "right", "image": "res/wifi.ppm",         "interactive": "true"  }
     ],
-    "height": "32"
+    "height": "32",
+    "modifiers": [
+      { "name": "active", "mask": "00FFFF" },
+      { "name": "focus",  "mask": "0000FF" }
+    ]
   }
 }
