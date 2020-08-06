@@ -51,6 +51,7 @@ Toolbar::Toolbar(char* filename){
     WARN("Unable to open display, program may crash");
   }
   screen = DefaultScreen(dis);
+  eventDelay = std::atol(json->get("delay-usec")->value("50000").c_str());
   width = XWidthOfScreen(ScreenOfDisplay(dis, screen));
   height = std::atoi(json->get("toolbar")->get("height")->value("32").c_str());
   /* Get default colours from X11 */
@@ -160,9 +161,13 @@ Toolbar::~Toolbar(){
 void Toolbar::loop(){
   XEvent event;
   while(true){
+    bool requestRedraw = LOG::CURRENT_TIME_MINUTES() > lastTimeUpdate;
     /* Get window events */
-    if(!XCheckMaskEvent(dis, eventMask, &event)){
-      usleep(20000);
+    if(
+      !XCheckMaskEvent(dis, eventMask, &event) &&
+      !requestRedraw
+    ){
+      usleep(eventDelay);
       continue;
     }
     /* Check and handle event type */
@@ -173,7 +178,7 @@ void Toolbar::loop(){
     switch(type){
       case Expose :
         if(event.xexpose.count == 0){
-          redraw();
+          requestRedraw = true;
         }
         break;
       case VisibilityNotify :
@@ -211,13 +216,19 @@ void Toolbar::loop(){
         }
       }
       /* As we moused over something, redraw to be safe */
-      redraw();
+      requestRedraw = true;
     }
     /* TODO: Handle main logic. */
+    /* Perform one redraw if requested */
+    if(requestRedraw){
+      redraw();
+    }
   }
 }
 
 void Toolbar::redraw(){
+  /* Store current time */
+  lastTimeUpdate = LOG::CURRENT_TIME_MINUTES();
   /* Loop icons */
   for(int x = 0; x < icons.size(); x++){
     icons[x]->draw(dis, win, gc);

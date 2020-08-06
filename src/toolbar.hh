@@ -26,6 +26,7 @@ class Toolbar{
     int screen;
     Window win;
     GC gc;
+    long eventDelay;
     int width;
     int height;
     unsigned long background;
@@ -33,6 +34,7 @@ class Toolbar{
     long eventMask;
     std::vector<Icon*> icons;
     XFontStruct* font;
+    long long lastTimeUpdate;
     char tBuff[16];
 
   public:

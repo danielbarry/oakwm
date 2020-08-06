@@ -5,6 +5,7 @@
       "background": "FFFFFF",
       "foreground": "000000"
     },
+    "delay-usec": "50000",
     "font": "-*-lucida-medium-r-*-*-18-*-75-75-*-*-*-*",
     "height": "32",
     "icons" : [
