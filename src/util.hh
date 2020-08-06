@@ -14,19 +14,25 @@ class Util{
      * been tested up to base 16.
      *
      * @param s The string to be converted.
-     * @param base The base to be converted.
+     * @param b The base to be converted.
      * @return The converted value.
      **/
-    static long strToLong(const char* s, int base){
+    static long strToLong(const char* s, int b){
       long v = 0;
-      for(int x = 0; s[x] != '\0'; x++){
-        v *= base;
+      bool m = false;
+      int x = 0;
+      if(s[x] == '-'){
+        m = true;
+        ++x;
+      }
+      while(s[x++] != '\0'){
+        v *= b;
         if(s[x] <= '9'){
           v += s[x] - '0';
         }else{
           v += (0b1011111 & s[x]) - 'A' + 10;
         }
       }
-      return v;
+      return m ? -v : v;
     }
 };
