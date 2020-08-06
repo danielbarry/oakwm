@@ -1,7 +1,9 @@
 #pragma once
 
+#include <map>
 #include <string>
 #include <X11/Xlib.h>
+#include <vector>
 
 /**
  * icon.hh
@@ -15,8 +17,9 @@ class Icon{
     bool interact;
     int width;
     int height;
-    char* data;
-    XImage* img;
+    std::map<std::string, int> mods;
+    std::vector<char*> data;
+    std::vector<XImage*> imgs;
     bool focus;
     bool active;
 
@@ -43,15 +46,26 @@ class Icon{
      **/
     ~Icon();
 
-     /**
-      * setXY()
-      *
-      * Set the X and Y offset positions for drawing.
-      *
-      * @param x The X offset.
-      * @param y The Y offset.
-      **/
-     void setXY(int x, int y);
+    /**
+     * addModifier()
+     *
+     * Add a colour modifier from the baseline based on a mask filter.
+     *
+     * @param name The name of the modifier.
+     * @param mask The mask to be applied.
+     * @param dis The display.
+     **/
+    void addModifier(std::string name, unsigned long mask, Display* dis);
+
+    /**
+     * setXY()
+     *
+     * Set the X and Y offset positions for drawing.
+     *
+     * @param x The X offset.
+     * @param y The Y offset.
+     **/
+    void setXY(int x, int y);
 
     /**
      * getWidth()
