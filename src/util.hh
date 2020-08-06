@@ -25,7 +25,8 @@ class Util{
         m = true;
         ++x;
       }
-      while(s[x++] != '\0'){
+      /* Add numbers together */
+      while(s[++x] != '\0'){
         v *= b;
         if(s[x] <= '9'){
           v += s[x] - '0';
