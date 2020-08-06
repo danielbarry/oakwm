@@ -60,6 +60,28 @@ class LOG{
 
   public:
     /**
+     * CURRENT_TIME_MINUTES()
+     *
+     * Get the current wall clock time in minutes since epoch.
+     *
+     * @return Number of minutes at the time of the request.
+     **/
+    static long long CURRENT_TIME_MINUTES(){
+      return std::chrono::duration_cast<std::chrono::minutes>(std::chrono::system_clock::now().time_since_epoch()).count();
+    }
+
+    /**
+     * CURRENT_TIME_SECONDS()
+     *
+     * Get the current wall clock time in seconds since epoch.
+     *
+     * @return Number of seconds at the time of the request.
+     **/
+    static long long CURRENT_TIME_SECONDS(){
+      return std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    }
+
+    /**
      * CURRENT_TIME_MILLIS()
      *
      * Get the current wall clock time in milliseconds since epoch.
