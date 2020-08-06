@@ -8,6 +8,7 @@
 #include "util.hh"
 
 #include <ctime>
+#include <unistd.h>
 
 /**
  * main()
@@ -82,14 +83,16 @@ Toolbar::Toolbar(char* filename){
   /* Set window properties */
   XSetWindowBackground(dis, win, background);
   /* Select allowed input methods */
-  XSelectInput(
-    dis,
-    win,
+  eventMask =
     ButtonPressMask   |
     ButtonReleaseMask |
     ExposureMask      |
     PointerMotionMask |
-    VisibilityChangeMask
+    VisibilityChangeMask;
+  XSelectInput(
+    dis,
+    win,
+    eventMask
   );
   /* Create graphics context */
   gc = XCreateGC(dis, win, 0, 0);
@@ -158,7 +161,10 @@ void Toolbar::loop(){
   XEvent event;
   while(true){
     /* Get window events */
-    XNextEvent(dis, &event);
+    if(!XCheckMaskEvent(dis, eventMask, &event)){
+      usleep(20000);
+      continue;
+    }
     /* Check and handle event type */
     int mouseX = -1;
     int mouseY = -1;
@@ -212,6 +218,10 @@ void Toolbar::loop(){
 }
 
 void Toolbar::redraw(){
+  /* Loop icons */
+  for(int x = 0; x < icons.size(); x++){
+    icons[x]->draw(dis, win, gc);
+  }
   /* Clear previous date string */
   int timeWidth = XTextWidth(font, tBuff, strlen(tBuff));
   int timeHeight = font->ascent + font->descent;
@@ -226,10 +236,6 @@ void Toolbar::redraw(){
     height
   );
   XSetForeground(dis, gc, foreground);
-  /* Loop icons */
-  for(int x = 0; x < icons.size(); x++){
-    icons[x]->draw(dis, win, gc);
-  }
   /* Get time string */
   time_t rawTime;
   struct tm* tInfo;
