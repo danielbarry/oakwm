@@ -19,10 +19,10 @@ class Util{
      **/
     static long strToLong(const char* s, int b){
       long v = 0;
-      bool m = false;
-      int x = 0;
-      if(s[x] == '-'){
-        m = true;
+      int x = -1;
+      /* Check for minus number on front */
+      bool m = s[x + 1] == '-';
+      if(m){
         ++x;
       }
       /* Add numbers together */
