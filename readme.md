@@ -64,7 +64,7 @@ VirtualBox manager to open the GUI (recommended for testing the UI).
 
 Login for vagrant is `vagrant` (username and password). Once in:
 
-    cd; sudo startx
+    cd; startx
 
 ## Credits
 
