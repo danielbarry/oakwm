@@ -398,7 +398,7 @@ class JSON{
       test.push_back("{\"1\":[\"a\"],\"2\":[\"b\"]}");
       bool r = true;
       /* Run parser tests */
-      for(int x = 0; x < test.size(); x += 2){
+      for(int x = 0; x < test.size(); x++){
         bool a = assurt((new JSON(test[x]))->toString().compare(test[x]) == 0);
         if(!a){
           printf("  in:  '%s'\n", test[x].c_str());
