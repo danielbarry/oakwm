@@ -1,6 +1,14 @@
 {
   "toolbar": {
     // NOTE: Order matters - icons aligned right are displayed backwards.
+    "battery": {
+      "battery": [
+        { "name": "Battery", "path": "/sys/class/power_supply/BAT0/capacity" }
+      ],
+      "dc": [
+        { "name": "AC", "path": "/sys/class/power_supply/AC/online" }
+      ]
+    },
     "colours": {
       "background": "FFFFFF",
       "foreground": "000000"
