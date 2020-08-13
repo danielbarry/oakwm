@@ -21,45 +21,65 @@
         "align": "left",
         "image": "res/plus.ppm",
         "interactive": "true",
+        "menu": [
+        ],
         "name": "Open"
       },
       {
         "align": "left",
         "image": "res/terminal.ppm",
         "interactive": "true",
+        "menu": [
+        ],
         "name": "Terminal"
       },
       {
         "align": "right",
         "image": "res/power.ppm",
         "interactive": "true",
+        "menu": [
+          { "text": "Log out"   },
+          { "text": "Suspend"   },
+          { "text": "Power Off" }
+        ],
         "name": "Power"
       },
       {
         "align": "right",
         "image": "res/wrench.ppm",
         "interactive": "true",
+        "menu": [
+        ],
         "name": "Configuration"
       },
       {
         "align": "right",
         "image": "res/battery-full.ppm",
         "interactive": "false",
+        "menu": [
+        ],
         "name": "Battery"
       },
       {
         "align": "right",
         "image": "res/volume-up.ppm",
         "interactive": "true",
+        "menu": [
+        ],
         "name": "Volume"
       },
       {
         "align": "right",
         "image": "res/wifi.ppm",
         "interactive": "true",
+        "menu": [
+        ],
         "name": "Network"
       }
     ],
+    "menu": {
+      "max-items": "16"
+    },
     "modifiers": [
       { "name": "active", "mask": "00FFFF" },
       { "name": "focus",  "mask": "0000FF" }
