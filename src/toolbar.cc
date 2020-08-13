@@ -5,6 +5,7 @@
 #include "git-rev.hh"
 #include "icon.cc"
 #include "log.hh"
+#include "menu.cc"
 #include "util.hh"
 
 #include <ctime>
@@ -103,11 +104,12 @@ Toolbar::Toolbar(char* filename){
   /* Clear the window and bring it on top of the other windows */
   XClearWindow(dis, win);
   XMapRaised(dis, win);
-  /* Generate some icons */
+  /* Generate some icons from the configuration */
   int leftOff = 0;
   int rightOff = width;
   for(int x = 0; x < json->get("toolbar")->get("icons")->length(); x++){
     JSON* iCfg = json->get("toolbar")->get("icons")->get(x);
+    /* Build icon */
     bool alignLeft = iCfg->get("align")->value("left").compare("left") == 0;
     Icon* icon = new Icon(
       iCfg->get("image")->value(""),
@@ -115,10 +117,12 @@ Toolbar::Toolbar(char* filename){
       0,
       0,
       iCfg->get("interactive")->value("false").compare("true") == 0,
+      new Menu(std::atoi(json->get("menu")->get("max-items")->value("16").c_str())),
       dis,
       win,
       gc
     );
+    /* Icon alignment */
     if(alignLeft){
       icon->setXY(leftOff, 0);
       leftOff += icon->getWidth();
@@ -126,6 +130,11 @@ Toolbar::Toolbar(char* filename){
       rightOff -= icon->getWidth();
       icon->setXY(rightOff, 0);
     }
+    /* Build menu */
+    for(int z = 0; z < iCfg->get("menu")->length(); z++){
+      /* TODO: Add menu items. */
+    }
+    /* Add to data structure */
     icons.emplace_back(icon);
   }
   activeIcon = NULL;

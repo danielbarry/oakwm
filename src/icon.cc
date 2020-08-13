@@ -11,6 +11,7 @@ Icon::Icon(
   int x,
   int y,
   bool inter,
+  Menu* menu,
   Display* dis,
   Window win,
   GC gc
@@ -19,6 +20,7 @@ Icon::Icon(
   destX = x;
   destY = y;
   interact = inter;
+  drop = menu;
   width = -1;
   height = -1;
   focus = false;
@@ -174,6 +176,10 @@ void Icon::setXY(int x, int y){
 
 std::string Icon::getName(){
   return nameId;
+}
+
+Menu* Icon::getMenu(){
+  return drop;
 }
 
 int Icon::getWidth(){

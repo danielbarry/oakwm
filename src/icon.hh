@@ -1,5 +1,7 @@
 #pragma once
 
+#include "menu.hh"
+
 #include <map>
 #include <string>
 #include <X11/Xlib.h>
@@ -16,6 +18,7 @@ class Icon{
     int destX;
     int destY;
     bool interact;
+    Menu* drop;
     int width;
     int height;
     std::map<std::string, int> mods;
@@ -35,6 +38,7 @@ class Icon{
      * @param x The X offset to start rendering the image to.
      * @param y The Y offset to start rendering the image to.
      * @param inter True if this icon is interactive.
+     * @param menu The menu and it's options to be displayed.
      * @param dis The display.
      * @param win The window.
      * @param gc The graphics object.
@@ -45,6 +49,7 @@ class Icon{
       int x,
       int y,
       bool inter,
+      Menu* menu,
       Display* dis,
       Window win,
       GC gc
@@ -86,6 +91,15 @@ class Icon{
      * @return The name of this icon.
      **/
     std::string getName();
+
+    /**
+     * getMenu()
+     *
+     * Get the menu for this icon.
+     *
+     * @return A menu instance for this icon.
+     **/
+    Menu* getMenu();
 
     /**
      * getWidth()
