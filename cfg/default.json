@@ -9,13 +9,48 @@
     "font": "-*-lucida-medium-r-*-*-18-*-75-75-*-*-*-*",
     "height": "32",
     "icons" : [
-      { "align": "left",  "image": "res/plus.ppm",         "interactive": "true"  },
-      { "align": "left",  "image": "res/terminal.ppm",     "interactive": "true"  },
-      { "align": "right", "image": "res/power.ppm",        "interactive": "true"  },
-      { "align": "right", "image": "res/wrench.ppm",       "interactive": "true"  },
-      { "align": "right", "image": "res/battery-full.ppm", "interactive": "false" },
-      { "align": "right", "image": "res/volume-up.ppm",    "interactive": "true"  },
-      { "align": "right", "image": "res/wifi.ppm",         "interactive": "true"  }
+      {
+        "align": "left",
+        "image": "res/plus.ppm",
+        "interactive": "true",
+        "name": "Open"
+      },
+      {
+        "align": "left",
+        "image": "res/terminal.ppm",
+        "interactive": "true",
+        "name": "Terminal"
+      },
+      {
+        "align": "right",
+        "image": "res/power.ppm",
+        "interactive": "true",
+        "name": "Power"
+      },
+      {
+        "align": "right",
+        "image": "res/wrench.ppm",
+        "interactive": "true",
+        "name": "Configuration"
+      },
+      {
+        "align": "right",
+        "image": "res/battery-full.ppm",
+        "interactive": "false",
+        "name": "Battery"
+      },
+      {
+        "align": "right",
+        "image": "res/volume-up.ppm",
+        "interactive": "true",
+        "name": "Volume"
+      },
+      {
+        "align": "right",
+        "image": "res/wifi.ppm",
+        "interactive": "true",
+        "name": "Network"
+      }
     ],
     "modifiers": [
       { "name": "active", "mask": "00FFFF" },
