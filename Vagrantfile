@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     # Add basic hardware values
     vb.customize [
       "modifyvm", :id,
-      "--cpuexecutioncap", "50",
+      "--cpuexecutioncap", "10",
       "--memory", "128",
     ]
   end
