@@ -64,6 +64,10 @@ class JSON{
               break;
             case '}' :
             case ']' :
+              /* Parent didn't bare children, don't double recursion escape */
+              if(type != JSON_TYPE_STR && childs.size() <= 0){
+                ++x;
+              }
             case ',' :
               /* End of this object */
               rawLen = x - offset;
