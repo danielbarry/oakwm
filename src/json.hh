@@ -396,6 +396,8 @@ class JSON{
       test.push_back("{\"test\":{{\"arg-a\":\"123\"},{\"arg-b\":\"456\"}}}");
       test.push_back("{\"test\":[{\"arg-a\":\"123\"},{\"arg-b\":\"456\"}]}");
       test.push_back("{\"1\":[\"a\"],\"2\":[\"b\"]}");
+      test.push_back("{\"a\":\"b\",\"c\":{\"d\":\"e\",\"f\":{},\"g\":\"h\"}}");
+      test.push_back("{\"a\":\"b\",\"c\":{\"d\":\"e\",\"f\":[],\"g\":\"h\"}}");
       bool r = true;
       /* Run parser tests */
       for(int x = 0; x < test.size(); x++){
