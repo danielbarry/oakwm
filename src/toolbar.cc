@@ -128,6 +128,7 @@ Toolbar::Toolbar(char* filename){
     }
     icons.emplace_back(icon);
   }
+  activeIcon = NULL;
   /* Apply icon modifiers */
   for(int x = 0; x < json->get("toolbar")->get("modifiers")->length(); x++){
     JSON* mCfg = json->get("toolbar")->get("modifiers")->get(x);
@@ -196,7 +197,8 @@ void Toolbar::loop(){
       case MotionNotify :
         mouseX = event.xmotion.x;
         mouseY = event.xmotion.y;
-        press = event.xmotion.state != 0;
+        press = event.xmotion.state &
+          (Button1Mask | Button2Mask | Button3Mask | Button4Mask | Button5Mask);
         break;
       default :
         WARN("Unhandled event triggered");
@@ -204,8 +206,12 @@ void Toolbar::loop(){
     }
     /* Update icon states if mouse event occurred */
     if(mouseX >= 0 && mouseY >= 0){
+      Icon* prevActiveIcon = activeIcon;
+      activeIcon = NULL;
+      /* Update icons */
       for(int i = 0; i < icons.size(); i++){
-        if(icons[i]->interactive() && icons[i]->insideBounds(mouseX, mouseY)){
+        if(icons[i]->interactive() && icons[i]->insideBounds(mouseX)){
+          activeIcon = icons[i];
           /* Is it hover of press related? */
           if(type == MotionNotify && !press){
             icons[i]->setFocused(true);
@@ -214,6 +220,21 @@ void Toolbar::loop(){
           }
         }else{
           icons[i]->setFocused(false);
+        }
+      }
+      /* Update drop down menu */
+      if(press){
+        if(activeIcon != NULL){
+          LOGM("Press detected for ", activeIcon->getName().c_str()); // TODO
+          /* TODO: Create new window if required. */
+          /* TODO: Highlight option if required. */
+        }
+      /* Update drop down on release */
+      }else{
+        LOG("Release detected"); // TODO
+        if(prevActiveIcon != NULL){
+          LOGM("Release for ", prevActiveIcon->getName().c_str()); // TODO
+          /* TODO: Execute command if required. */
         }
       }
       /* As we moused over something, redraw to be safe */

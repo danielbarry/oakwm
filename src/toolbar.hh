@@ -33,6 +33,7 @@ class Toolbar{
     unsigned long foreground;
     long eventMask;
     std::vector<Icon*> icons;
+    Icon* activeIcon;
     XFontStruct* font;
     long long lastTimeUpdate;
     char tBuff[16];
