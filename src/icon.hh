@@ -12,6 +12,7 @@
  **/
 class Icon{
   private:
+    std::string nameId;
     int destX;
     int destY;
     bool interact;
@@ -30,6 +31,7 @@ class Icon{
      * Load an image from disk.
      *
      * @param path The location of the image to be loaded.
+     * @param name The printable name of the icon.
      * @param x The X offset to start rendering the image to.
      * @param y The Y offset to start rendering the image to.
      * @param inter True if this icon is interactive.
@@ -37,7 +39,16 @@ class Icon{
      * @param win The window.
      * @param gc The graphics object.
      **/
-    Icon(std::string path, int x, int y, bool inter, Display* dis, Window win, GC gc);
+    Icon(
+      std::string path,
+      std::string name,
+      int x,
+      int y,
+      bool inter,
+      Display* dis,
+      Window win,
+      GC gc
+    );
 
     /**
      * ~Icon()
@@ -66,6 +77,15 @@ class Icon{
      * @param y The Y offset.
      **/
     void setXY(int x, int y);
+
+    /**
+     * getName()
+     *
+     * Get the assigned name for this icon.
+     *
+     * @return The name of this icon.
+     **/
+    std::string getName();
 
     /**
      * getWidth()

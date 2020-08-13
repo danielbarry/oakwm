@@ -5,7 +5,17 @@
 
 #include "log.hh"
 
-Icon::Icon(std::string path, int x, int y, bool inter, Display* dis, Window win, GC gc){
+Icon::Icon(
+  std::string path,
+  std::string name,
+  int x,
+  int y,
+  bool inter,
+  Display* dis,
+  Window win,
+  GC gc
+){
+  nameId = name;
   destX = x;
   destY = y;
   interact = inter;
@@ -160,6 +170,10 @@ void Icon::addModifier(std::string name, unsigned long mask, Display* dis){
 void Icon::setXY(int x, int y){
   destX = x;
   destY = y;
+}
+
+std::string Icon::getName(){
+  return nameId;
 }
 
 int Icon::getWidth(){

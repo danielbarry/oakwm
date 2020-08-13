@@ -111,6 +111,7 @@ Toolbar::Toolbar(char* filename){
     bool alignLeft = iCfg->get("align")->value("left").compare("left") == 0;
     Icon* icon = new Icon(
       iCfg->get("image")->value(""),
+      iCfg->get("name")->value(""),
       0,
       0,
       iCfg->get("interactive")->value("false").compare("true") == 0,
@@ -218,7 +219,6 @@ void Toolbar::loop(){
       /* As we moused over something, redraw to be safe */
       requestRedraw = true;
     }
-    /* TODO: Handle main logic. */
     /* Perform one redraw if requested */
     if(requestRedraw){
       redraw();
