@@ -188,12 +188,8 @@ bool Icon::interactive(){
   return interact;
 }
 
-bool Icon::insideBounds(int x, int y){
-  /* NOTE: X computed first as it's the most likely to fail. */
-  return x >= destX        &&
-         x < destX + width &&
-         y >= destY        &&
-         y < destY + height;
+bool Icon::insideBounds(int x){
+  return x >= destX && x < destX + width;
 }
 
 void Icon::setFocused(bool state){

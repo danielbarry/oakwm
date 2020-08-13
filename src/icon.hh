@@ -120,10 +120,9 @@ class Icon{
      * Check if the mouse is within the bounds of the icon.
      *
      * @param x The X location of the mouse.
-     * @param Y The X location of the mouse.
      * @return True if within the bounds, otherwise false.
      **/
-    bool insideBounds(int x, int y);
+    bool insideBounds(int x);
 
     /**
      * setFocused()
