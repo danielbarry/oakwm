@@ -28,5 +28,14 @@ void Menu::setState(bool fState, bool aState, int x, int y){
 }
 
 void Menu::draw(Display* dis){
-  /* TODO: Draw the window. */
+  if(focus || active){
+    if(!focus){
+      if(items.size() > 0) LOG("Active"); // TODO
+      /* TODO: Open window if not open. */
+      /* TODO: Highlight selection if applicable. */
+    }
+  }else{
+    if(items.size() > 0) LOG("De-focus"); // TODO
+    /* TODO: Close window and free resource if it's open. */
+  }
 }
