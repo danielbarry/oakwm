@@ -118,6 +118,7 @@ Toolbar::Toolbar(char* filename){
       0,
       iCfg->get("interactive")->value("false").compare("true") == 0,
       new Menu(
+        height,
         std::atoi(json->get("menu")->get("max-items")->value("16").c_str()),
         dis,
         screen

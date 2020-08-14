@@ -20,6 +20,7 @@ class Menu{
     int screen;
     Window win;
     GC gc;
+    int yOffset;
     int maxItems;
     std::vector<Item> items;
     bool focus;
@@ -31,11 +32,12 @@ class Menu{
      *
      * Setup the menu with options.
      *
+     * @param yOff The Y offset to start drawing the menu.
      * @param max The maximum number of items to be displayed.
      * @param display The display to show the window on.
      * @param disScreen The screen to show the window on.
      **/
-    Menu(int max, Display* display, int disScreen);
+    Menu(int yOff, int max, Display* display, int disScreen);
 
     /**
      * ~Menu()

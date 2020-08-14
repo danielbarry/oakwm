@@ -1,6 +1,7 @@
 #include "menu.hh"
 
-Menu::Menu(int max, Display* display, int disScreen){
+Menu::Menu(int yOff, int max, Display* display, int disScreen){
+  yOffset = yOff;
   maxItems = max;
   Display* dis = display;
   int screen = disScreen;
