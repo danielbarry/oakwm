@@ -25,6 +25,8 @@ class Menu{
     int width;
     unsigned long background;
     unsigned long foreground;
+    unsigned long highlight;
+    XFontStruct* font;
     int maxItems;
     std::vector<Item> items;
     bool focus;
@@ -41,6 +43,8 @@ class Menu{
      * @param maxWidth The maximum width of the component.
      * @param bg Set the background colour for the menu.
      * @param fg Set the foreground colour for the menu.
+     * @param hc Set the highlight colour of the menu.
+     * @param strFont The font to be used for the drop down.
      * @param max The maximum number of items to be displayed.
      * @param display The display to show the window on.
      * @param disScreen The screen to show the window on.
@@ -51,6 +55,8 @@ class Menu{
       int maxWidth,
       unsigned long bg,
       unsigned long fg,
+      unsigned long hc,
+      XFontStruct* strFont,
       int max,
       Display* display,
       int disScreen

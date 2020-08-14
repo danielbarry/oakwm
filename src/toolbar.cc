@@ -138,6 +138,8 @@ Toolbar::Toolbar(char* filename){
         std::atoi(json->get("menu")->get("max-width")->value("128").c_str()),
         background,
         foreground,
+        highlight,
+        font,
         std::atoi(json->get("menu")->get("max-items")->value("16").c_str()),
         dis,
         screen

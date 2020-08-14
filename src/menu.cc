@@ -6,6 +6,8 @@ Menu::Menu(
   int maxWidth,
   unsigned long bg,
   unsigned long fg,
+  unsigned long hc,
+  XFontStruct* strFont,
   int max,
   Display* display,
   int disScreen
@@ -15,6 +17,8 @@ Menu::Menu(
   width = maxWidth;
   background = bg;
   foreground = fg;
+  highlight = hc;
+  font = strFont;
   maxItems = max;
   dis = display;
   screen = disScreen;
