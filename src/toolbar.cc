@@ -117,7 +117,9 @@ Toolbar::Toolbar(char* filename){
       0,
       0,
       iCfg->get("interactive")->value("false").compare("true") == 0,
-      new Menu(std::atoi(json->get("menu")->get("max-items")->value("16").c_str())),
+      new Menu(
+        std::atoi(json->get("menu")->get("max-items")->value("16").c_str())
+      ),
       dis,
       win,
       gc
