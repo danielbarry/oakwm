@@ -11,7 +11,8 @@
     },
     "colours": {
       "background": "FFFFFF",
-      "foreground": "000000"
+      "foreground": "000000",
+      "highlight": "0000FF"
     },
     "delay-usec": "50000",
     "font": "-*-lucida-medium-r-*-*-18-*-75-75-*-*-*-*",
