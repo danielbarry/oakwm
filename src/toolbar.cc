@@ -109,6 +109,16 @@ Toolbar::Toolbar(char* filename){
   /* Clear the window and bring it on top of the other windows */
   XClearWindow(dis, win);
   XMapRaised(dis, win);
+  /* Load font for text */
+  font = XLoadQueryFont(
+    dis,
+    json->get("font")->value("fixed").c_str()
+  );
+  if(font != 0){
+    XSetFont(dis, gc, font->fid);
+  }else{
+    WARN("Unable to load font");
+  }
   /* Generate some icons from the configuration */
   int leftOff = 0;
   int rightOff = width;
@@ -165,16 +175,6 @@ Toolbar::Toolbar(char* filename){
     for(int z = 0; z < icons.size(); z++){
       icons[z]->addModifier(name, mask, dis);
     }
-  }
-  /* Load font for text */
-  font = XLoadQueryFont(
-    dis,
-    json->get("toolbar")->get("font")->value("fixed").c_str()
-  );
-  if(font != 0){
-    XSetFont(dis, gc, font->fid);
-  }else{
-    WARN("Unable to load font");
   }
   /* Enter main loop */
   loop();
