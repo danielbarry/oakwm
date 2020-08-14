@@ -66,8 +66,9 @@ class Menu{
      * @param aState True if menu active, otherwise false.
      * @param x The X location of the mouse.
      * @param y The Y location of the mouse.
+     * @return True if the internal state changes, otherwise false.
      **/
-    void setState(bool fState, bool aState, int x, int y);
+    bool setState(bool fState, bool aState, int x, int y);
 
     /**
      * draw()

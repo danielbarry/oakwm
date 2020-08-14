@@ -23,9 +23,12 @@ bool Menu::addItem(std::string text, std::string cmd){
   return true;
 }
 
-void Menu::setState(bool fState, bool aState, int x, int y){
+bool Menu::setState(bool fState, bool aState, int x, int y){
   focus = fState;
   active = aState;
+  /* TODO: Check if highlighted has changed. */
+  /* TODO: Check if we should execute something. */
+  return false;
 }
 
 void Menu::draw(Display* dis){

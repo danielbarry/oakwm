@@ -209,7 +209,7 @@ bool Icon::setFocused(bool state, int x, int y){
   focus = state;
   change |= prev != focus;
   /* Update icon with new states */
-  drop->setState(focus, active, x, y);
+  change |= drop->setState(focus, active, x, y);
   /* Inform the caller whether a redraw is required */
   return change;
 }
@@ -225,7 +225,7 @@ bool Icon::setActive(bool state, int x, int y){
   active = state;
   change |= prev != active;
   /* Update icon with new states */
-  drop->setState(focus, active, x, y);
+  change |= drop->setState(focus, active, x, y);
   /* Inform the caller whether a redraw is required */
   return change;
 }
