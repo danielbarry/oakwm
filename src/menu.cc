@@ -93,7 +93,7 @@ void Menu::draw(Display* dis){
         x,
         yOffset,
         width,
-        (textHeight * items.size()) + 1,
+        (textHeight * items.size()) + 2,
         0,
         CopyFromParent,
         CopyFromParent,
