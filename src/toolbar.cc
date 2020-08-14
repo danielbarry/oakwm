@@ -219,7 +219,7 @@ void Toolbar::loop(){
       activeIcon = NULL;
       /* Update icons */
       for(int i = 0; i < icons.size(); i++){
-        if(icons[i]->interactive() && icons[i]->insideBounds(mouseX)){
+        if(icons[i]->interactive() && icons[i]->insideBounds(mouseX, mouseY)){
           activeIcon = icons[i];
           /* Is it hover of press related? */
           if(type == MotionNotify && !press){

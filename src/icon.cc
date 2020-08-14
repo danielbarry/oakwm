@@ -194,7 +194,7 @@ bool Icon::interactive(){
   return interact;
 }
 
-bool Icon::insideBounds(int x){
+bool Icon::insideBounds(int x, int y){
   return x >= destX && x < destX + width;
 }
 
