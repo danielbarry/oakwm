@@ -22,6 +22,8 @@ class Menu{
     GC gc;
     int maxItems;
     std::vector<Item> items;
+    bool focus;
+    bool active;
 
   public:
     /**
@@ -54,24 +56,16 @@ class Menu{
     bool addItem(std::string text, std::string cmd);
 
     /**
-     * focusItem()
+     * setState()
      *
-     * Allow an item to be focused based on mouse position.
+     * Inform the menu that it should update the internal state.
      *
-     * @param x The mouse X location.
-     * @param y The mouse Y location.
+     * @param fState True if menu focused, otherwise false.
+     * @param aState True if menu active, otherwise false.
+     * @param x The X location of the mouse.
+     * @param y The Y location of the mouse.
      **/
-    void focusItem(int x, int y);
-
-    /**
-     * selectItem()
-     *
-     * Select an item based on the mouse position.
-     *
-     * @param x The mouse X location.
-     * @param y The mouse Y location.
-     **/
-    void selectItem(int x, int y);
+    void setState(bool fState, bool aState, int x, int y);
 
     /**
      * draw()

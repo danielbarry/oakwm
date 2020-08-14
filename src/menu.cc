@@ -22,13 +22,9 @@ bool Menu::addItem(std::string text, std::string cmd){
   return true;
 }
 
-void Menu::focusItem(int x, int y){
-  /* TODO: Select an element to be focused. */
-}
-
-void Menu::selectItem(int x, int y){
-  /* TODO: Select a specific element. */
-  system(items[0].cmd.c_str()); // TODO
+void Menu::setState(bool fState, bool aState, int x, int y){
+  focus = fState;
+  active = aState;
 }
 
 void Menu::draw(Display* dis){
