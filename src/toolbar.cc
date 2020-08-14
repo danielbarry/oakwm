@@ -118,7 +118,11 @@ Toolbar::Toolbar(char* filename){
       0,
       iCfg->get("interactive")->value("false").compare("true") == 0,
       new Menu(
-        height,
+        0,
+        0,
+        std::atoi(json->get("menu")->get("max-width")->value("128").c_str()),
+        background,
+        foreground,
         std::atoi(json->get("menu")->get("max-items")->value("16").c_str()),
         dis,
         screen
@@ -130,10 +134,12 @@ Toolbar::Toolbar(char* filename){
     /* Icon alignment */
     if(alignLeft){
       icon->setXY(leftOff, 0);
+      icon->getMenu()->setXY(leftOff + (icon->getWidth() / 2), height);
       leftOff += icon->getWidth();
     }else{
       rightOff -= icon->getWidth();
       icon->setXY(rightOff, 0);
+      icon->getMenu()->setXY(rightOff + (icon->getWidth() / 2), height);
     }
     /* Build menu */
     for(int z = 0; z < iCfg->get("menu")->length(); z++){

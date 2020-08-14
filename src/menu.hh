@@ -20,7 +20,11 @@ class Menu{
     int screen;
     Window win;
     GC gc;
+    int xOffset;
     int yOffset;
+    int width;
+    unsigned long background;
+    unsigned long foreground;
     int maxItems;
     std::vector<Item> items;
     bool focus;
@@ -32,12 +36,25 @@ class Menu{
      *
      * Setup the menu with options.
      *
+     * @param xOff The Y offset to start drawing the menu.
      * @param yOff The Y offset to start drawing the menu.
+     * @param maxWidth The maximum width of the component.
+     * @param bg Set the background colour for the menu.
+     * @param fg Set the foreground colour for the menu.
      * @param max The maximum number of items to be displayed.
      * @param display The display to show the window on.
      * @param disScreen The screen to show the window on.
      **/
-    Menu(int yOff, int max, Display* display, int disScreen);
+    Menu(
+      int xOff,
+      int yOff,
+      int maxWidth,
+      unsigned long bg,
+      unsigned long fg,
+      int max,
+      Display* display,
+      int disScreen
+    );
 
     /**
      * ~Menu()
@@ -45,6 +62,16 @@ class Menu{
      * Release resources for the menu.
      **/
     ~Menu();
+
+    /**
+     * setXY()
+     *
+     * Set the X and Y offset positions for drawing.
+     *
+     * @param x The X offset.
+     * @param y The Y offset.
+     **/
+    void setXY(int x, int y);
 
     /**
      * addItem()

@@ -87,7 +87,8 @@
       }
     ],
     "menu": {
-      "max-items": "16"
+      "max-items": "16",
+      "max-width": "128"
     },
     "modifiers": [
       { "name": "active", "mask": "00FFFF" },
