@@ -40,15 +40,15 @@
         "interactive": "true",
         "menu": [
           {
-            "command": "xterm -e \"echo log_out; sleep 5\" &",
+            "command": "killall oakwm &",
             "text": "Log out"
           },
           {
-            "command": "xterm -e \"echo suspend; sleep 5\" &",
+            "command": "xterm -e \"sudo systemctl suspend\" &",
             "text": "Suspend"
           },
           {
-            "command": "xterm -e \"echo poweroff; sleep 5\" &",
+            "command": "xterm -e \"sudo systemctl poweroff\" &",
             "text": "Power Off"
           }
         ],
