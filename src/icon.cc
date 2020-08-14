@@ -218,4 +218,6 @@ void Icon::draw(Display* dis, Window win, GC gc){
   }else{
     XPutImage(dis, win, gc, imgs[0], 0, 0, destX, destY, width, height);
   }
+  /* Allow menu to redraw too */
+  drop->draw(dis);
 }
