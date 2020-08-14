@@ -38,9 +38,18 @@
         "image": "res/power.ppm",
         "interactive": "true",
         "menu": [
-          { "text": "Log out"   },
-          { "text": "Suspend"   },
-          { "text": "Power Off" }
+          {
+            "command": "xterm -e \"echo log_out; sleep 5\" &",
+            "text": "Log out"
+          },
+          {
+            "command": "xterm -e \"echo suspend; sleep 5\" &",
+            "text": "Suspend"
+          },
+          {
+            "command": "xterm -e \"echo poweroff; sleep 5\" &",
+            "text": "Power Off"
+          }
         ],
         "name": "Power"
       },
