@@ -226,19 +226,18 @@ void Toolbar::loop(){
         if(icons[i]->interactive() && icons[i]->insideBounds(mouseX, mouseY)){
           /* Is it hover of press related? */
           if(type == MotionNotify && !press){
-            icons[i]->setFocused(true, mouseX, mouseY);
+            requestRedraw |= icons[i]->setFocused(true, mouseX, mouseY);
           }else{
-            icons[i]->setActive(press, mouseX, mouseY);
+            requestRedraw |= icons[i]->setActive(press, mouseX, mouseY);
           }
         }else{
-          icons[i]->setFocused(false, mouseX, mouseY);
+          requestRedraw |= icons[i]->setFocused(false, mouseX, mouseY);
         }
       }
-      /* As we moused over something, redraw to be safe */
-      requestRedraw = true;
     }
     /* Perform one redraw if requested */
     if(requestRedraw){
+      LOG("Redraw requested"); // TODO
       redraw();
     }
   }
