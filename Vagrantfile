@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
     vb.customize [
       "modifyvm", :id,
       "--cpuexecutioncap", "25",
-      "--memory", "128",
+      "--memory", "256",
     ]
   end
   # Remove need for password
