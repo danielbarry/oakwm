@@ -34,7 +34,7 @@
   * `[ ]` `general.hh`
   * `[~]` `manager.cc`
   * `[ ]` `rotated.hh`
-* `[ ]` Design user interface
+* `[x]` Design user interface
 * `[~]` Basic toolbar
   * `[x]` Width of display
   * `[x]` Always on top
@@ -48,11 +48,12 @@
   * `[x]` Icon hover and click
   * `[ ]` Display battery state
   * `[ ]` Display connection state
-  * `[ ]` Drop down menu
-* `[~]` Configuration file
+  * `[x]` Drop down menu
+  * `[x]` Execute commands based on selection
+* `[x]` Configuration file
   * `[x]` Convert Java JSON config project
-  * `[ ]` Pull in JSON strings
-  * `[ ]` Conversion of JSON strings
+  * `[x]` Pull in JSON strings
+  * `[x]` Conversion of JSON strings
 * `[ ]` Window manager
   * `[ ]` Remove root background click
   * `[ ]` Remove session exit
