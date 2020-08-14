@@ -16,6 +16,10 @@ class Menu{
       std::string cmd;
     };
 
+    Display* dis;
+    int screen;
+    Window win;
+    GC gc;
     int maxItems;
     std::vector<Item> items;
 
@@ -26,8 +30,10 @@ class Menu{
      * Setup the menu with options.
      *
      * @param max The maximum number of items to be displayed.
+     * @param display The display to show the window on.
+     * @param disScreen The screen to show the window on.
      **/
-    Menu(int max);
+    Menu(int max, Display* display, int disScreen);
 
     /**
      * ~Menu()
