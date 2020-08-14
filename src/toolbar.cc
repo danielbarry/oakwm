@@ -237,7 +237,6 @@ void Toolbar::loop(){
     }
     /* Perform one redraw if requested */
     if(requestRedraw){
-      LOG("Redraw requested"); // TODO
       redraw();
     }
   }
