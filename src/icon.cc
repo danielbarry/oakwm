@@ -198,14 +198,16 @@ bool Icon::insideBounds(int x, int y){
   return x >= destX && x < destX + width;
 }
 
-void Icon::setFocused(bool state){
+void Icon::setFocused(bool state, int x, int y){
   active = false;
   focus = state;
+  drop->setState(focus, active, x, y);
 }
 
-void Icon::setActive(bool state){
+void Icon::setActive(bool state, int x, int y){
   focus = false;
   active = state;
+  drop->setState(focus, active, x, y);
 }
 
 void Icon::draw(Display* dis, Window win, GC gc){

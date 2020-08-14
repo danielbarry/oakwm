@@ -145,8 +145,10 @@ class Icon{
      * Inform the icon that it should update the internal focus state.
      *
      * @param state True if icon focused, otherwise false.
+     * @param x The X location of the mouse.
+     * @param y The Y location of the mouse.
      **/
-    void setFocused(bool state);
+    void setFocused(bool state, int x, int y);
 
     /**
      * setActive()
@@ -154,8 +156,10 @@ class Icon{
      * Inform the icon that it should update the internal active state.
      *
      * @param state True if the icon active, otherwise false.
+     * @param x The X location of the mouse.
+     * @param y The Y location of the mouse.
      **/
-    void setActive(bool state);
+    void setActive(bool state, int x, int y);
 
     /**
      * draw()
