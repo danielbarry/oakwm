@@ -218,7 +218,7 @@ bool Icon::setActive(bool state, int x, int y){
   bool change = false;
   /* Update focus state */
   bool prev = focus;
-  focus = false;
+  focus = true;
   change |= prev != focus;
   /* Update active state */
   prev = active;
@@ -232,10 +232,10 @@ bool Icon::setActive(bool state, int x, int y){
 
 void Icon::draw(Display* dis, Window win, GC gc){
   if(focus || active){
-    if(focus){
-      XPutImage(dis, win, gc, imgs[mods["focus"]], 0, 0, destX, destY, width, height);
-    }else{
+    if(active){
       XPutImage(dis, win, gc, imgs[mods["active"]], 0, 0, destX, destY, width, height);
+    }else{
+      XPutImage(dis, win, gc, imgs[mods["focus"]], 0, 0, destX, destY, width, height);
     }
   }else{
     XPutImage(dis, win, gc, imgs[0], 0, 0, destX, destY, width, height);
