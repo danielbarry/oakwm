@@ -134,7 +134,10 @@ Toolbar::Toolbar(char* filename){
     }
     /* Build menu */
     for(int z = 0; z < iCfg->get("menu")->length(); z++){
-      /* TODO: Add menu items. */
+      icon->getMenu()->addItem(
+        iCfg->get("menu")->get(z)->get("text")->value("Unknown"),
+        iCfg->get("menu")->get(z)->get("command")->value(";")
+      );
     }
     /* Add to data structure */
     icons.emplace_back(icon);
