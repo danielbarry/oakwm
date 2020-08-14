@@ -30,6 +30,7 @@ class Menu{
     int textHeight;
     int maxItems;
     std::vector<Item> items;
+    int select;
     bool focus;
     bool active;
 
