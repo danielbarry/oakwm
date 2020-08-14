@@ -27,6 +27,7 @@ class Menu{
     unsigned long foreground;
     unsigned long highlight;
     XFontStruct* font;
+    int textHeight;
     int maxItems;
     std::vector<Item> items;
     bool focus;

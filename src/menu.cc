@@ -19,6 +19,7 @@ Menu::Menu(
   foreground = fg;
   highlight = hc;
   font = strFont;
+  textHeight = font->ascent + font->descent;
   maxItems = max;
   dis = display;
   screen = disScreen;
