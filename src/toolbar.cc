@@ -289,7 +289,7 @@ void Toolbar::redraw(){
     win,
     gc,
     (width / 2) - (timeWidth / 2),
-    (height / 2) + (timeHeight / 2),
+    (height / 2) + (timeHeight / 2) - font->descent,
     tBuff,
     strlen(tBuff)
   );
