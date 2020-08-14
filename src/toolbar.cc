@@ -42,6 +42,7 @@ Toolbar::Toolbar(char* filename){
   if(filename != NULL){
     LOG("Loading configuration...");
     json = JSON::build(filename);
+    json = json->get("toolbar");
   }else{
     LOG("No configuration provided");
     json = new JSON("{}");
@@ -54,7 +55,7 @@ Toolbar::Toolbar(char* filename){
   screen = DefaultScreen(dis);
   eventDelay = std::atol(json->get("delay-usec")->value("50000").c_str());
   width = XWidthOfScreen(ScreenOfDisplay(dis, screen));
-  height = std::atoi(json->get("toolbar")->get("height")->value("32").c_str());
+  height = std::atoi(json->get("height")->value("32").c_str());
   /* Get default colours from X11 */
   background = Util::strToLong(
     json->get("colours")->get("background")->value("FFFFFF").c_str(),
@@ -111,8 +112,8 @@ Toolbar::Toolbar(char* filename){
   /* Generate some icons from the configuration */
   int leftOff = 0;
   int rightOff = width;
-  for(int x = 0; x < json->get("toolbar")->get("icons")->length(); x++){
-    JSON* iCfg = json->get("toolbar")->get("icons")->get(x);
+  for(int x = 0; x < json->get("icons")->length(); x++){
+    JSON* iCfg = json->get("icons")->get(x);
     /* Build icon */
     bool alignLeft = iCfg->get("align")->value("left").compare("left") == 0;
     Icon* icon = new Icon(
@@ -156,8 +157,8 @@ Toolbar::Toolbar(char* filename){
     icons.emplace_back(icon);
   }
   /* Apply icon modifiers */
-  for(int x = 0; x < json->get("toolbar")->get("modifiers")->length(); x++){
-    JSON* mCfg = json->get("toolbar")->get("modifiers")->get(x);
+  for(int x = 0; x < json->get("modifiers")->length(); x++){
+    JSON* mCfg = json->get("modifiers")->get(x);
     std::string name = mCfg->get("name")->value("");
     unsigned long mask = Util::strToLong(mCfg->get("mask")->value("").c_str(), 16);
     /* Update our icons with modifiers */
