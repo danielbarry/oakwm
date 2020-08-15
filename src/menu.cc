@@ -26,6 +26,8 @@ Menu::Menu(
   screen = disScreen;
   win = NULL;
   gc = NULL;
+  focus = false;
+  active = false;
 }
 
 Menu::~Menu(){
