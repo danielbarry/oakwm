@@ -44,7 +44,7 @@ cause the X server to crash otherwise.
 ## Testing
 
 Testing is performed with `oakwm` running in within Vagrant. The vagrant file
-has a low-ish execution cap and 128MB of RAM to better simulate low-powered
+has a low-ish execution cap and 256MB of RAM to better simulate low-powered
 devices. (You may need to adjust this to suite your particular testing needs.)
 
 You will need:
