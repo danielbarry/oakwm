@@ -16,6 +16,7 @@ class Menu{
       std::string cmd;
     };
 
+    std::string mName;
     Display* dis;
     int screen;
     Window win;
@@ -40,6 +41,7 @@ class Menu{
      *
      * Setup the menu with options.
      *
+     * @param name The name of the menu (should match the icon).
      * @param xOff The Y offset to start drawing the menu.
      * @param yOff The Y offset to start drawing the menu.
      * @param maxWidth The maximum width of the component.
@@ -52,6 +54,7 @@ class Menu{
      * @param disScreen The screen to show the window on.
      **/
     Menu(
+      std::string name,
       int xOff,
       int yOff,
       int maxWidth,

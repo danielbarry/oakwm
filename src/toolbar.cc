@@ -133,6 +133,7 @@ Toolbar::Toolbar(char* filename){
       0,
       iCfg->get("interactive")->value("false").compare("true") == 0,
       new Menu(
+        iCfg->get("name")->value(""),
         0,
         0,
         std::atoi(json->get("menu")->get("max-width")->value("128").c_str()),

@@ -1,6 +1,7 @@
 #include "menu.hh"
 
 Menu::Menu(
+  std::string name,
   int xOff,
   int yOff,
   int maxWidth,
@@ -12,6 +13,7 @@ Menu::Menu(
   Display* display,
   int disScreen
 ){
+  mName = name;
   xOffset = xOff;
   yOffset = yOff;
   width = maxWidth;
