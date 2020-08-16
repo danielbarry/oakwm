@@ -152,9 +152,9 @@ Toolbar::Toolbar(char* filename){
     if(alignLeft){
       icon->setXY(leftOff, 0);
       icon->getMenu()->setXY(leftOff + (icon->getWidth() / 2), height);
-      leftOff += icon->getWidth();
+      leftOff += icon->getWidth() + 2;
     }else{
-      rightOff -= icon->getWidth();
+      rightOff -= icon->getWidth() + 2;
       icon->setXY(rightOff, 0);
       icon->getMenu()->setXY(rightOff + (icon->getWidth() / 2), height);
     }
