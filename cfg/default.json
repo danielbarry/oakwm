@@ -131,7 +131,7 @@
         "interactive": "true",
         "menu": [
           {
-            "command": "xterm -geometry 80x24+0+40 -e \"alsamixer\" &",
+            "command": "gnome-alsamixer &",
             "text": "Settings"
           }
         ],
@@ -143,7 +143,7 @@
         "interactive": "true",
         "menu": [
           {
-            "command": "xterm -geometry 80x24+0+40 -e \"wicd-curses\" &",
+            "command": "nm-connection-editor &",
             "text": "Settings"
           }
         ],

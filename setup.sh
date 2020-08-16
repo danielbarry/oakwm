@@ -20,11 +20,11 @@ sudo apt-get -y install \
 
 # Install nice to have programs
 sudo apt-get -y install \
-  alsa-utils            \
   dillo                 \
+  gnome-alsamixer       \
   matchbox-keyboard     \
-  thunderbird           \
-  wicd-curses
+  network-manager-gnome \
+  thunderbird
 
 # Remove unwanted packages
 sudo apt-get -y autoremove
