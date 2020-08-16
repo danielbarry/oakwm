@@ -32,11 +32,54 @@
             "text": "Browser"
           },
           {
+            "command": "thunderbird &",
+            "text": "Email & Chat"
+          },
+          {
             "command": "xterm -geometry 80x24+0+40 -e \"vim; exec bash\" &",
             "text": "Vim"
           }
         ],
         "name": "Open"
+      },
+      {
+        "align": "left",
+        "image": "res/display.ppm",
+        "interactive": "true",
+        "menu": [
+          {
+            "command": "xrandr -o right; killall oakwm-toolbar; ./oakwm-toolbar &",
+            "text": "Rotate"
+          },
+          {
+            "text": "Snap Display"
+          }
+        ],
+        "name": "Display"
+      },
+      {
+        "align": "left",
+        "image": "res/front.ppm",
+        "interactive": "true",
+        "menu": [
+        ],
+        "name": "Windows"
+      },
+      {
+        "align": "left",
+        "image": "res/keyboard.ppm",
+        "interactive": "true",
+        "menu": [
+          {
+            "command": "matchbox-keyboard &",
+            "text": "Open"
+          },
+          {
+            "command": "killall matchbox-keyboard &",
+            "text": "Close"
+          }
+        ],
+        "name": "Keyboard"
       },
       {
         "align": "right",

@@ -22,6 +22,8 @@ sudo apt-get -y install \
 sudo apt-get -y install \
   alsa-utils            \
   dillo                 \
+  matchbox-keyboard     \
+  thunderbird           \
   wicd-curses
 
 # Remove unwanted packages
