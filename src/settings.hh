@@ -14,8 +14,8 @@
 // combinations should be okay.  If you set AUTO_RAISE you must leave
 // the other two False; you'll then get focus-follows, auto-raise, and
 // a delay on auto-raise as configured in the DELAY settings below.
-#define CONFIG_CLICK_TO_FOCUS     False
-#define CONFIG_RAISE_ON_FOCUS     False
+#define CONFIG_CLICK_TO_FOCUS     True
+#define CONFIG_RAISE_ON_FOCUS     True
 #define CONFIG_AUTO_RAISE         False
 
 // milliseconds.  In theory these only apply when using AUTO_RAISE,
