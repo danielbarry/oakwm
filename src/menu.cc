@@ -79,6 +79,40 @@ void Menu::draw(Display* dis){
   if(active){
     /* Open window if not open */
     if(win == NULL){
+      /* If we are a special menu, we need to populate the list */
+      if(mName.compare("Windows") == 0){
+        /* Remove any existing */
+        items.clear();
+        /* Query list of windows */
+        Window wThis = RootWindow(dis, NULL);
+        Window wRoot;
+        Window wParent;
+        Window* wChilds;
+        unsigned int nChilds = 0;
+        XQueryTree(dis, wThis, &wRoot, &wParent, &wChilds, &nChilds);
+        char* name;
+        for(int x = 0; x < nChilds; x++){
+          Window* iChilds;
+          unsigned int zChilds = 0;
+          XQueryTree(dis, wChilds[x], &wRoot, &wParent, &iChilds, &zChilds);
+          for(int z = 0; z < zChilds; z++){
+            XFetchName(dis, iChilds[z], &name);
+            if(name != NULL){
+              std::string wName(name);
+              XFree(name);
+              /* TODO: Move max text length to configuration. */
+              /* Make sure we don't have infinitely long window names */
+              if(wName.size() > 10){
+                wName = wName.substr(0, 8);
+                wName += "..";
+              }
+              addItem(wName, "", iChilds[z]);
+            }
+          }
+          XFree(iChilds);
+        }
+        XFree(wChilds);
+      }
       /* Calculate X offset of the drop down */
       int winWidth = XWidthOfScreen(ScreenOfDisplay(dis, screen));
       int x = xOffset - (width / 2);
