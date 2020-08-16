@@ -45,13 +45,14 @@ void Menu::setXY(int x, int y){
   yOffset = y;
 }
 
-bool Menu::addItem(std::string text, std::string cmd){
+bool Menu::addItem(std::string text, std::string cmd, Window win){
   if(items.size() + 1 >= maxItems){
     return false;
   }
   items.emplace_back(Item());
   items[items.size() - 1].text = text;
   items[items.size() - 1].cmd = cmd;
+  items[items.size() - 1].win = win;
   return true;
 }
 

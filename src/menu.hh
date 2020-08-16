@@ -14,6 +14,7 @@ class Menu{
     struct Item{
       std::string text;
       std::string cmd;
+      Window win;
     };
 
     std::string mName;
@@ -91,9 +92,10 @@ class Menu{
      *
      * @param text The text to be displayed in the drop down menu.
      * @param cmd The command to be executed.
+     * @param win The window attached to the task, NULL if not applicable.
      * @return True if successful, otherwise false.
      **/
-    bool addItem(std::string text, std::string cmd);
+    bool addItem(std::string text, std::string cmd, Window win);
 
     /**
      * setState()
