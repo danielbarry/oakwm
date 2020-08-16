@@ -77,7 +77,7 @@
 * `[ ]` Remove mouse mode
 * `[ ]` Snap window functionality
 * `[ ]` Auto-snap when entering mobile mode
-* `[ ]` Switch between programs
+* `[x]` Switch between programs
 * `[ ]` Volume
 * `[ ]` Power saving
   * `[ ]` Perform some actions when in low power scenario
