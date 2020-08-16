@@ -162,7 +162,7 @@ Toolbar::Toolbar(char* filename){
     for(int z = 0; z < iCfg->get("menu")->length(); z++){
       icon->getMenu()->addItem(
         iCfg->get("menu")->get(z)->get("text")->value("Unknown"),
-        iCfg->get("menu")->get(z)->get("command")->value(";")
+        iCfg->get("menu")->get(z)->get("command")->value("")
       );
     }
     /* Add to data structure */
