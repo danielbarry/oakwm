@@ -143,7 +143,6 @@ void Menu::draw(Display* dis){
       /* Reset foreground colour */
       XSetForeground(dis, gc, foreground);
     }
-    /* TODO: Highlight selection if applicable. */
     /* TODO: This is a hack, two or more windows doing this would fight. */
     XRaiseWindow(dis, win);
     XFlush(dis);
