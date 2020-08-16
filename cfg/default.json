@@ -24,6 +24,10 @@
         "interactive": "true",
         "menu": [
           {
+            "command": "xterm -geometry 80x24+0+40 -e \"exec bash\" &",
+            "text": "Terminal"
+          },
+          {
             "command": "dillo &",
             "text": "Browser"
           },
@@ -33,18 +37,6 @@
           }
         ],
         "name": "Open"
-      },
-      {
-        "align": "left",
-        "image": "res/terminal.ppm",
-        "interactive": "true",
-        "menu": [
-          {
-            "command": "xterm -geometry 80x24+0+40 -e \"exec bash\" &",
-            "text": "New"
-          }
-        ],
-        "name": "Terminal"
       },
       {
         "align": "right",
