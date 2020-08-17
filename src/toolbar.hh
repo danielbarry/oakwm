@@ -31,7 +31,6 @@ class Toolbar{
     int height;
     unsigned long background;
     unsigned long foreground;
-    unsigned long highlight;
     long eventMask;
     std::vector<Icon*> icons;
     XFontStruct* font;

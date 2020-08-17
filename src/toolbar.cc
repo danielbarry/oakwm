@@ -65,10 +65,6 @@ Toolbar::Toolbar(char* filename){
     json->get("colours")->get("foreground")->value("000000").c_str(),
     16
   );
-  highlight = Util::strToLong(
-    json->get("colours")->get("highlight")->value("888888").c_str(),
-    16
-  );
   /* Setup window attributes (remove border) */
   XSetWindowAttributes attr;
   attr.override_redirect = 1;
