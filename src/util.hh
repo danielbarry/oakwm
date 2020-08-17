@@ -1,5 +1,7 @@
 #pragma once
 
+#define MAGIC_EVIL_NUM 666
+
 /**
  * util.hh
  *
@@ -7,6 +9,9 @@
  **/
 class Util{
   public:
+    static long long lastPowerUpdate;
+    static int lastPowerValue;
+
     /**
      * strToLong()
      *
@@ -142,17 +147,24 @@ class Util{
      * charging).
      **/
     static int getPowerState(std::string batt, std::string dc){
-      int power = 0;
+      if(lastPowerUpdate == LOG::CURRENT_TIME_SECONDS() && lastPowerValue != MAGIC_EVIL_NUM){
+        return lastPowerValue;
+      }
       std::string read;
       /* Read battery value */
       std::ifstream fBatt(batt);
       std::getline(fBatt, read);
       fBatt.close();
-      power = std::atoi(read.c_str());
+      lastPowerValue = std::atoi(read.c_str());
       /* Read DC value */
       std::ifstream fDC(dc);
       std::getline(fDC, read);
       fDC.close();
-      return read.compare("0") == 0 ? power : -power;
+      lastPowerUpdate = LOG::CURRENT_TIME_SECONDS();
+      return read.compare("0") == 0 ? lastPowerValue : -lastPowerValue;
     }
 };
+
+/* Don't poll the IO to hard */
+long long Util::lastPowerUpdate = LOG::CURRENT_TIME_SECONDS();
+int Util::lastPowerValue = MAGIC_EVIL_NUM;
