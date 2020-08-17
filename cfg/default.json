@@ -118,8 +118,11 @@
       {
         "align": "right",
         "image": "res/battery-full.ppm",
-        "interactive": "false",
+        "interactive": "true",
         "menu": [
+          {
+            "text": "$BATTERY$"
+          }
         ],
         "name": "Battery"
       },
