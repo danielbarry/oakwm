@@ -73,14 +73,15 @@ bool Menu::setState(bool fState, bool aState, int x, int y){
   }
   /* Check if we should perform some action */
   if(win != NULL && focus && !active && select >= 0){
+    Item selection = items[select];
     /* Check if it's to bring a window to the front */
-    if(items[select].win != NULL){
-      XRaiseWindow(dis, items[select].win);
-      XMapRaised(dis, items[select].win);
+    if(selection.win != NULL){
+      XRaiseWindow(dis, selection.win);
+      XMapRaised(dis, selection.win);
     }
     /* If command set, run it */
-    if(items[select].cmd.size() > 0){
-      system(items[select].cmd.c_str());
+    if(selection.cmd.size() > 0){
+      system(selection.cmd.c_str());
     }
   }
   /* Tell the caller if something changed */
