@@ -1,32 +1,38 @@
 #include "menu.hh"
 
+#include "util.hh"
+
 Menu::Menu(
-  std::string name,
-  int xOff,
-  int yOff,
-  int maxWidth,
-  unsigned long bg,
-  unsigned long fg,
-  unsigned long hc,
+  JSON* cfg,
+  JSON* iCfg,
   XFontStruct* strFont,
-  int max,
   Display* display,
   int disScreen
 ){
-  mName = name;
-  type = Type::NONE;
+  config = cfg;
+  mName = iCfg->get("name")->value("");
+  type = Type::NORMAL;
   if(mName.compare("Windows") == 0){
     type = Type::WINDOWS;
   }
-  xOffset = xOff;
-  yOffset = yOff;
-  width = maxWidth;
-  background = bg;
-  foreground = fg;
-  highlight = hc;
+  xOffset = 0;
+  yOffset = 0;
+  width = std::atoi(cfg->get("menu")->get("max-width")->value("128").c_str());
+  background = Util::strToLong(
+    cfg->get("colours")->get("background")->value("FFFFFF").c_str(),
+    16
+  );
+  foreground = Util::strToLong(
+    cfg->get("colours")->get("foreground")->value("000000").c_str(),
+    16
+  );
+  highlight = Util::strToLong(
+    cfg->get("colours")->get("highlight")->value("888888").c_str(),
+    16
+  );
   font = strFont;
   textHeight = font->ascent + font->descent;
-  maxItems = max;
+  maxItems = std::atoi(cfg->get("menu")->get("max-items")->value("16").c_str());
   select = -1;
   dis = display;
   screen = disScreen;
@@ -34,6 +40,14 @@ Menu::Menu(
   gc = NULL;
   focus = false;
   active = false;
+  /* Build menu */
+  for(int z = 0; z < iCfg->get("menu")->length(); z++){
+    addItem(
+      iCfg->get("menu")->get(z)->get("text")->value("Unknown"),
+      iCfg->get("menu")->get(z)->get("command")->value(""),
+      NULL
+    );
+  }
 }
 
 Menu::~Menu(){
@@ -54,6 +68,11 @@ bool Menu::addItem(std::string text, std::string cmd, Window win){
     return false;
   }
   items.emplace_back(Item());
+  /* Check for special battery status case */
+  if(text.compare("$BATTERY$") == 0){
+    /* TODO: Replace with battery status. */
+  }
+  /* Load in universal values */
   items[items.size() - 1].text = text;
   items[items.size() - 1].cmd = cmd;
   items[items.size() - 1].win = win;

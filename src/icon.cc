@@ -6,27 +6,25 @@
 #include "log.hh"
 
 Icon::Icon(
-  std::string path,
-  std::string name,
-  int x,
-  int y,
-  bool inter,
-  Menu* menu,
+  JSON* cfg,
+  JSON* iCfg,
+  XFontStruct* font,
   Display* dis,
+  int screen,
   Window win,
   GC gc
 ){
-  nameId = name;
-  destX = x;
-  destY = y;
-  interact = inter;
-  drop = menu;
+  nameId = iCfg->get("name")->value("");
+  destX = 0;
+  destY = 0;
+  interact = iCfg->get("interactive")->value("false").compare("true") == 0;
+  drop = new Menu(cfg, iCfg, font, dis, screen);
   width = -1;
   height = -1;
   focus = false;
   active = false;
   /* Read pixels out of the file */
-  std::ifstream file(path);
+  std::ifstream file(iCfg->get("image")->value(""));
   std::string fmt;
   int depth = -1;
   int z = 0;

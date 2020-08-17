@@ -1,5 +1,7 @@
 #pragma once
 
+#include "json.hh"
+
 #include <string>
 #include <X11/Xlib.h>
 #include <vector>
@@ -12,7 +14,7 @@
 class Menu{
   private:
     enum Type{
-      NONE,
+      NORMAL,
       WINDOWS
     };
 
@@ -22,6 +24,7 @@ class Menu{
       Window win;
     };
 
+    JSON* config;
     std::string mName;
     Display* dis;
     int screen;
@@ -48,28 +51,16 @@ class Menu{
      *
      * Setup the menu with options.
      *
-     * @param name The name of the menu (should match the icon).
-     * @param xOff The Y offset to start drawing the menu.
-     * @param yOff The Y offset to start drawing the menu.
-     * @param maxWidth The maximum width of the component.
-     * @param bg Set the background colour for the menu.
-     * @param fg Set the foreground colour for the menu.
-     * @param hc Set the highlight colour of the menu.
+     * @param cfg The configuration for the toolbar.
+     * @param iCfg The configuration for this menu.
      * @param strFont The font to be used for the drop down.
-     * @param max The maximum number of items to be displayed.
      * @param display The display to show the window on.
      * @param disScreen The screen to show the window on.
      **/
     Menu(
-      std::string name,
-      int xOff,
-      int yOff,
-      int maxWidth,
-      unsigned long bg,
-      unsigned long fg,
-      unsigned long hc,
+      JSON* cfg,
+      JSON* iCfg,
       XFontStruct* strFont,
-      int max,
       Display* display,
       int disScreen
     );

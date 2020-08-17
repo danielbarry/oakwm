@@ -2,6 +2,8 @@
 
 #include "menu.hh"
 
+#include "json.hh"
+
 #include <map>
 #include <string>
 #include <X11/Xlib.h>
@@ -14,6 +16,7 @@
  **/
 class Icon{
   private:
+    JSON* config;
     std::string nameId;
     int destX;
     int destY;
@@ -33,24 +36,21 @@ class Icon{
      *
      * Load an image from disk.
      *
-     * @param path The location of the image to be loaded.
-     * @param name The printable name of the icon.
-     * @param x The X offset to start rendering the image to.
-     * @param y The Y offset to start rendering the image to.
-     * @param inter True if this icon is interactive.
+     * @param cfg The configuration for the toolbar.
+     * @param iCfg The configuration for this menu.
+     * @param font The font to be used for the drop down.
      * @param menu The menu and it's options to be displayed.
      * @param dis The display.
+     * @param screen The screen to show the window on.
      * @param win The window.
      * @param gc The graphics object.
      **/
     Icon(
-      std::string path,
-      std::string name,
-      int x,
-      int y,
-      bool inter,
-      Menu* menu,
+      JSON* cfg,
+      JSON* iCfg,
+      XFontStruct* font,
       Display* dis,
+      int screen,
       Window win,
       GC gc
     );

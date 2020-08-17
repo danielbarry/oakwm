@@ -126,29 +126,7 @@ Toolbar::Toolbar(char* filename){
     JSON* iCfg = json->get("icons")->get(x);
     /* Build icon */
     bool alignLeft = iCfg->get("align")->value("left").compare("left") == 0;
-    Icon* icon = new Icon(
-      iCfg->get("image")->value(""),
-      iCfg->get("name")->value(""),
-      0,
-      0,
-      iCfg->get("interactive")->value("false").compare("true") == 0,
-      new Menu(
-        iCfg->get("name")->value(""),
-        0,
-        0,
-        std::atoi(json->get("menu")->get("max-width")->value("128").c_str()),
-        background,
-        foreground,
-        highlight,
-        font,
-        std::atoi(json->get("menu")->get("max-items")->value("16").c_str()),
-        dis,
-        screen
-      ),
-      dis,
-      win,
-      gc
-    );
+    Icon* icon = new Icon(json, iCfg, font, dis, screen, win, gc);
     /* Icon alignment */
     if(alignLeft){
       icon->setXY(leftOff, 0);
@@ -158,14 +136,6 @@ Toolbar::Toolbar(char* filename){
       rightOff -= icon->getWidth() + 2;
       icon->setXY(rightOff, 0);
       icon->getMenu()->setXY(rightOff + (icon->getWidth() / 2), height);
-    }
-    /* Build menu */
-    for(int z = 0; z < iCfg->get("menu")->length(); z++){
-      icon->getMenu()->addItem(
-        iCfg->get("menu")->get(z)->get("text")->value("Unknown"),
-        iCfg->get("menu")->get(z)->get("command")->value(""),
-        NULL
-      );
     }
     /* Add to data structure */
     icons.emplace_back(icon);
