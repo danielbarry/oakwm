@@ -36,7 +36,7 @@ Menu::Menu(
   select = -1;
   dis = display;
   screen = disScreen;
-  win = NULL;
+  win = (Window)NULL;
   gc = NULL;
   focus = false;
   active = false;
@@ -45,16 +45,16 @@ Menu::Menu(
     addItem(
       iCfg->get("menu")->get(z)->get("text")->value("Unknown"),
       iCfg->get("menu")->get(z)->get("command")->value(""),
-      NULL
+      (Window)NULL
     );
   }
 }
 
 Menu::~Menu(){
-  if(win != NULL){
+  if(win != (Window)NULL){
     XFreeGC(dis, gc);
     XDestroyWindow(dis, win);
-    win = NULL;
+    win = (Window)NULL;
   }
 }
 
@@ -91,10 +91,10 @@ bool Menu::setState(bool fState, bool aState, int x, int y){
     select = -1;
   }
   /* Check if we should perform some action */
-  if(win != NULL && focus && !active && select >= 0){
+  if(win != (Window)NULL && focus && !active && select >= 0){
     Item selection = items[select];
     /* Check if it's to bring a window to the front */
-    if(selection.win != NULL){
+    if(selection.win != (Window)NULL){
       XRaiseWindow(dis, selection.win);
       XMapRaised(dis, selection.win);
     }
@@ -110,13 +110,13 @@ bool Menu::setState(bool fState, bool aState, int x, int y){
 void Menu::draw(Display* dis){
   if(active){
     /* Open window if not open */
-    if(win == NULL){
+    if(win == (Window)NULL){
       /* If we are a special menu, we need to populate the list */
       if(type == Type::WINDOWS){
         /* Remove any existing */
         items.clear();
         /* Query list of windows */
-        Window wThis = RootWindow(dis, NULL);
+        Window wThis = RootWindow(dis, (Window)NULL);
         Window wRoot;
         Window wParent;
         Window* wChilds;
@@ -215,10 +215,10 @@ void Menu::draw(Display* dis){
     XFlush(dis);
   }else{
     /* Close window and free resource if it's open */
-    if(win != NULL){
+    if(win != (Window)NULL){
       XFreeGC(dis, gc);
       XDestroyWindow(dis, win);
-      win = NULL;
+      win = (Window)NULL;
     }
   }
 }
