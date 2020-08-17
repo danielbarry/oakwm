@@ -129,4 +129,30 @@ class Util{
       }
       return data;
     }
+
+    /**
+     * getPowerState()
+     *
+     * Get the current state of the system power.
+     *
+     * @param batt The location of the battery status.
+     * @param dc The location of the DC status.
+     * @return A positive integer between 0 and 100 if on battery, otherwise a
+     * negative integer indicating the battery status on DC (assumed to be
+     * charging).
+     **/
+    static int getPowerState(std::string batt, std::string dc){
+      int power = 0;
+      std::string read;
+      /* Read battery value */
+      std::ifstream fBatt(batt);
+      std::getline(fBatt, read);
+      fBatt.close();
+      power = std::atoi(read.c_str());
+      /* Read DC value */
+      std::ifstream fDC(dc);
+      std::getline(fDC, read);
+      fDC.close();
+      return read.compare("0") == 0 ? power : -power;
+    }
 };
