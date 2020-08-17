@@ -46,7 +46,7 @@
   * `[x]` Display time
   * `[x]` Draw basic icons
   * `[x]` Icon hover and click
-  * `[ ]` Display battery state
+  * `[~]` Display battery state
   * `[ ]` Display connection state
   * `[x]` Drop down menu
   * `[x]` Execute commands based on selection
