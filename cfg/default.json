@@ -1,14 +1,6 @@
 {
   "toolbar": {
     // NOTE: Order matters - icons aligned right are displayed backwards.
-    "battery": {
-      "battery": [
-        { "name": "Battery", "path": "/sys/class/power_supply/BAT0/capacity" }
-      ],
-      "dc": [
-        { "name": "AC", "path": "/sys/class/power_supply/AC/online" }
-      ]
-    },
     "colours": {
       "background": "FFFFFF",
       "foreground": "000000",
@@ -120,9 +112,7 @@
         "image": "res/battery-full.ppm",
         "interactive": "true",
         "menu": [
-          {
-            "text": "$BATTERY$"
-          }
+          { "text": "$POWER$" }
         ],
         "name": "Battery"
       },
@@ -158,6 +148,10 @@
     "modifiers": [
       { "name": "active", "mask": "00FFFF" },
       { "name": "focus",  "mask": "0000FF" }
-    ]
+    ],
+    "power": {
+      "battery": "/sys/class/power_supply/BAT0/capacity",
+      "dc": "/sys/class/power_supply/AC/online"
+    }
   }
 }

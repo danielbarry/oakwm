@@ -18,7 +18,14 @@ class Menu{
       WINDOWS
     };
 
+    enum ItemType{
+      COMMAND,
+      NONE,
+      POWER
+    };
+
     struct Item{
+      ItemType type;
       std::string text;
       std::string cmd;
       Window win;
@@ -44,6 +51,8 @@ class Menu{
     int select;
     bool focus;
     bool active;
+    std::string pathBatt;
+    std::string pathDC;
 
   public:
     /**

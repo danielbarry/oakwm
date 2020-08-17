@@ -48,6 +48,8 @@ Menu::Menu(
       (Window)NULL
     );
   }
+  pathBatt = cfg->get("power")->get("battery")->value("");
+  pathDC = cfg->get("power")->get("dc")->value("");
 }
 
 Menu::~Menu(){
@@ -64,18 +66,25 @@ void Menu::setXY(int x, int y){
 }
 
 bool Menu::addItem(std::string text, std::string cmd, Window win){
+  /* Make sure we can add */
   if(items.size() + 1 >= maxItems){
     return false;
   }
+  /* Create new item */
   items.emplace_back(Item());
-  /* Check for special battery status case */
-  if(text.compare("$BATTERY$") == 0){
-    /* TODO: Replace with battery status. */
-  }
+  int index = items.size() - 1;
   /* Load in universal values */
-  items[items.size() - 1].text = text;
-  items[items.size() - 1].cmd = cmd;
-  items[items.size() - 1].win = win;
+  items[index].text = text;
+  items[index].cmd = cmd;
+  items[index].win = win;
+  /* Figure out the type of this item */
+  items[index].type = ItemType::NONE;
+  if(cmd.size() > 0){
+    items[index].type = ItemType::COMMAND;
+  }
+  if(text.compare("$POWER$") == 0){
+    items[index].type = ItemType::POWER;
+  }
   return true;
 }
 
@@ -94,12 +103,12 @@ bool Menu::setState(bool fState, bool aState, int x, int y){
   if(win != (Window)NULL && focus && !active && select >= 0){
     Item selection = items[select];
     /* Check if it's to bring a window to the front */
-    if(selection.win != (Window)NULL){
+    if(type == Type::WINDOWS){
       XRaiseWindow(dis, selection.win);
       XMapRaised(dis, selection.win);
     }
     /* If command set, run it */
-    if(selection.cmd.size() > 0){
+    if(selection.type == ItemType::COMMAND){
       system(selection.cmd.c_str());
     }
   }
@@ -196,6 +205,21 @@ void Menu::draw(Display* dis){
         XSetForeground(dis, gc, highlight);
         XFillRectangle(dis, win, gc, 0, x * textHeight, width, textHeight);
         XSetForeground(dis, gc, background);
+      }
+      /* Read state if required */
+      int cap;
+      switch(items[x].type){
+        case POWER :
+          cap = Util::getPowerState(pathBatt, pathDC);
+          if(cap >= 0){
+            items[x].text = "Battery: " + std::to_string(cap) + "%";
+          }else{
+            items[x].text = "Charge: " + std::to_string(-cap) + "%";
+          }
+          break;
+        default :
+          /* Do nothing */
+          break;
       }
       /* Draw time */
       XDrawString(
