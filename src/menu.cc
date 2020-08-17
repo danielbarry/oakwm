@@ -14,6 +14,10 @@ Menu::Menu(
   int disScreen
 ){
   mName = name;
+  type = Type::NONE;
+  if(mName.compare("Windows") == 0){
+    type = Type::WINDOWS;
+  }
   xOffset = xOff;
   yOffset = yOff;
   width = maxWidth;
@@ -88,7 +92,7 @@ void Menu::draw(Display* dis){
     /* Open window if not open */
     if(win == NULL){
       /* If we are a special menu, we need to populate the list */
-      if(mName.compare("Windows") == 0){
+      if(type == Type::WINDOWS){
         /* Remove any existing */
         items.clear();
         /* Query list of windows */

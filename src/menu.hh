@@ -11,6 +11,11 @@
  **/
 class Menu{
   private:
+    enum Type{
+      NONE,
+      WINDOWS
+    };
+
     struct Item{
       std::string text;
       std::string cmd;
@@ -22,6 +27,7 @@ class Menu{
     int screen;
     Window win;
     GC gc;
+    Type type;
     int xOffset;
     int yOffset;
     int width;
