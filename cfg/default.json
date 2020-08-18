@@ -98,11 +98,15 @@
         "menu": [
           {
             "command": "xterm -geometry 80x24+0+40 -e \"sudo apt-get update; sudo apt-get upgrade\" &",
-            "text": "Update"
+            "text": "Update Pkg"
           },
           {
             "command": "xterm -geometry 80x24+0+40 -e \"sudo apt-get autoremove; sudo apt-get autoclean\" &",
-            "text": "Clean"
+            "text": "Clean Pkg"
+          },
+          {
+            "command": "nm-connection-editor &",
+            "text": "WiFi Config"
           }
         ],
         "name": "Configuration"
@@ -132,12 +136,6 @@
         "align": "right",
         "image": "res/wifi.ppm",
         "interactive": "true",
-        "menu": [
-          {
-            "command": "nm-connection-editor &",
-            "text": "Settings"
-          }
-        ],
         "name": "Network"
       }
     ],
