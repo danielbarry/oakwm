@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ifaddrs.h>
+
 #define MAGIC_EVIL_NUM 666
 
 /**
@@ -11,6 +13,8 @@ class Util{
   public:
     static long long lastPowerUpdate;
     static int lastPowerValue;
+    static long long lastNetworkUpdate;
+    static ifaddrs* lastNetworkValue;
 
     /**
      * strToLong()
@@ -164,8 +168,31 @@ class Util{
       lastPowerValue = read.compare("0") == 0 ? lastPowerValue : -lastPowerValue;
       return lastPowerValue;
     }
+
+    /**
+     * getNetworkState()
+     *
+     * Get the current state of the system networks.
+     *
+     * @return A list of network devices, otherwise NULL.
+     **/
+    static ifaddrs* getNetworkState(){
+      if(lastNetworkUpdate == LOG::CURRENT_TIME_SECONDS() && lastNetworkValue != NULL){
+        return lastNetworkValue;
+      }
+      /* Free previous list of network devices if needed */
+      if(lastNetworkValue != NULL){
+        freeifaddrs(lastNetworkValue);
+      }
+      /* Get latest list of values */
+      getifaddrs(&lastNetworkValue);
+      lastNetworkUpdate = LOG::CURRENT_TIME_SECONDS();
+      return lastNetworkValue;
+    }
 };
 
 /* Don't poll the IO to hard */
 long long Util::lastPowerUpdate = LOG::CURRENT_TIME_SECONDS();
 int Util::lastPowerValue = MAGIC_EVIL_NUM;
+long long Util::lastNetworkUpdate = LOG::CURRENT_TIME_SECONDS();
+ifaddrs* Util::lastNetworkValue = NULL;
