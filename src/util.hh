@@ -161,7 +161,8 @@ class Util{
       std::getline(fDC, read);
       fDC.close();
       lastPowerUpdate = LOG::CURRENT_TIME_SECONDS();
-      return read.compare("0") == 0 ? lastPowerValue : -lastPowerValue;
+      lastPowerValue = read.compare("0") == 0 ? lastPowerValue : -lastPowerValue;
+      return lastPowerValue;
     }
 };
 
