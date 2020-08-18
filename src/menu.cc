@@ -12,6 +12,9 @@ Menu::Menu(
   config = cfg;
   mName = iCfg->get("name")->value("");
   type = Type::NORMAL;
+  if(mName.compare("Network") == 0){
+    type = Type::NETWORK;
+  }
   if(mName.compare("Windows") == 0){
     type = Type::WINDOWS;
   }
@@ -121,38 +124,58 @@ void Menu::draw(Display* dis){
     /* Open window if not open */
     if(win == (Window)NULL){
       /* If we are a special menu, we need to populate the list */
-      if(type == Type::WINDOWS){
-        /* Remove any existing */
-        items.clear();
-        /* Query list of windows */
-        Window wThis = RootWindow(dis, (Window)NULL);
-        Window wRoot;
-        Window wParent;
-        Window* wChilds;
-        unsigned int nChilds = 0;
-        XQueryTree(dis, wThis, &wRoot, &wParent, &wChilds, &nChilds);
-        char* name;
-        for(int x = 0; x < nChilds; x++){
-          Window* iChilds;
-          unsigned int zChilds = 0;
-          XQueryTree(dis, wChilds[x], &wRoot, &wParent, &iChilds, &zChilds);
-          for(int z = 0; z < zChilds; z++){
-            XFetchName(dis, iChilds[z], &name);
-            if(name != NULL){
-              std::string wName(name);
-              XFree(name);
-              /* TODO: Move max text length to configuration. */
-              /* Make sure we don't have infinitely long window names */
-              if(wName.size() > 10){
-                wName = wName.substr(0, 8);
-                wName += "..";
-              }
-              addItem(wName, "", iChilds[z]);
+      ifaddrs* ifa;
+      switch(type){
+        case NETWORK :
+          /* Remove any existing */
+          items.clear();
+          /* TODO: Add list of network devices and their state. */
+          ifa = Util::getNetworkState();
+          while(ifa != NULL){
+            if(
+              ifa->ifa_addr->sa_family == AF_INET ||
+              ifa->ifa_addr->sa_family == AF_INET6
+            ){
+              /* Add the item */
+              addItem(std::string(ifa->ifa_name), "", (Window)NULL);
             }
+            /* Now let's get the next device */
+            ifa = ifa->ifa_next;
           }
-          XFree(iChilds);
-        }
-        XFree(wChilds);
+          break;
+        case WINDOWS :
+          /* Remove any existing */
+          items.clear();
+          /* Query list of windows */
+          Window wThis = RootWindow(dis, (Window)NULL);
+          Window wRoot;
+          Window wParent;
+          Window* wChilds;
+          unsigned int nChilds = 0;
+          XQueryTree(dis, wThis, &wRoot, &wParent, &wChilds, &nChilds);
+          char* name;
+          for(int x = 0; x < nChilds; x++){
+            Window* iChilds;
+            unsigned int zChilds = 0;
+            XQueryTree(dis, wChilds[x], &wRoot, &wParent, &iChilds, &zChilds);
+            for(int z = 0; z < zChilds; z++){
+              XFetchName(dis, iChilds[z], &name);
+              if(name != NULL){
+                std::string wName(name);
+                XFree(name);
+                /* TODO: Move max text length to configuration. */
+                /* Make sure we don't have infinitely long window names */
+                if(wName.size() > 10){
+                  wName = wName.substr(0, 8);
+                  wName += "..";
+                }
+                addItem(wName, "", iChilds[z]);
+              }
+            }
+            XFree(iChilds);
+          }
+          XFree(wChilds);
+          break;
       }
       /* Calculate X offset of the drop down */
       int winWidth = XWidthOfScreen(ScreenOfDisplay(dis, screen));

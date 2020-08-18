@@ -14,6 +14,7 @@
 class Menu{
   private:
     enum Type{
+      NETWORK,
       NORMAL,
       WINDOWS
     };
