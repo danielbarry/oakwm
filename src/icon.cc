@@ -41,6 +41,14 @@ Icon::Icon(
       0
     )
   );
+  /* Apply icon modifiers */
+  for(int x = 0; x < cfg->get("modifiers")->length(); x++){
+    JSON* mCfg = cfg->get("modifiers")->get(x);
+    std::string name = mCfg->get("name")->value("");
+    unsigned long mask = Util::strToLong(mCfg->get("mask")->value("").c_str(), 16);
+    /* Update our icon with modifiers */
+    addModifier(name, mask, dis);
+  }
 }
 
 Icon::~Icon(){

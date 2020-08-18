@@ -136,16 +136,6 @@ Toolbar::Toolbar(char* filename){
     /* Add to data structure */
     icons.emplace_back(icon);
   }
-  /* Apply icon modifiers */
-  for(int x = 0; x < json->get("modifiers")->length(); x++){
-    JSON* mCfg = json->get("modifiers")->get(x);
-    std::string name = mCfg->get("name")->value("");
-    unsigned long mask = Util::strToLong(mCfg->get("mask")->value("").c_str(), 16);
-    /* Update our icons with modifiers */
-    for(int z = 0; z < icons.size(); z++){
-      icons[z]->addModifier(name, mask, dis);
-    }
-  }
   /* Enter main loop */
   loop();
 }
