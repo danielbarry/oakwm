@@ -93,7 +93,7 @@
       },
       {
         "align": "right",
-        "image": "res/wrench.ppm",
+        "image": "res/gear.ppm",
         "interactive": "true",
         "menu": [
           {
