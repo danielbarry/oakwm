@@ -126,8 +126,48 @@
         "interactive": "true",
         "menu": [
           {
-            "command": "gnome-alsamixer &",
-            "text": "Settings"
+            "command": "amixer sset 'Master' 0% &",
+            "text": "0%"
+          },
+          {
+            "command": "amixer sset 'Master' 10% &",
+            "text": "10%"
+          },
+          {
+            "command": "amixer sset 'Master' 20% &",
+            "text": "20%"
+          },
+          {
+            "command": "amixer sset 'Master' 30% &",
+            "text": "30%"
+          },
+          {
+            "command": "amixer sset 'Master' 40% &",
+            "text": "40%"
+          },
+          {
+            "command": "amixer sset 'Master' 50% &",
+            "text": "50%"
+          },
+          {
+            "command": "amixer sset 'Master' 60% &",
+            "text": "60%"
+          },
+          {
+            "command": "amixer sset 'Master' 70% &",
+            "text": "70%"
+          },
+          {
+            "command": "amixer sset 'Master' 80% &",
+            "text": "80%"
+          },
+          {
+            "command": "amixer sset 'Master' 90% &",
+            "text": "90%"
+          },
+          {
+            "command": "amixer sset 'Master' 100% &",
+            "text": "100%"
           }
         ],
         "name": "Volume"

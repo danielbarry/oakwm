@@ -20,8 +20,8 @@ sudo apt-get -y install \
 
 # Install nice to have programs
 sudo apt-get -y install \
+  alsa-utils            \
   dillo                 \
-  gnome-alsamixer       \
   matchbox-keyboard     \
   network-manager-gnome \
   thunderbird
