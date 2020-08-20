@@ -2,9 +2,9 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
-#define CONFIG_NICE_FONT	  "-*-lucida-bold-r-*-*-14-*-75-75-*-*-*-*"
-#define CONFIG_NICE_MENU_FONT	  "-*-lucida-medium-r-*-*-14-*-75-75-*-*-*-*"
-#define CONFIG_NASTY_FONT	  "fixed"
+#define CONFIG_NICE_FONT	  ((char*)"-*-lucida-bold-r-*-*-14-*-75-75-*-*-*-*")
+#define CONFIG_NICE_MENU_FONT	  ((char*)"-*-lucida-medium-r-*-*-14-*-75-75-*-*-*-*")
+#define CONFIG_NASTY_FONT	  ((char*)"fixed")
 
 #define CONFIG_EXEC_USING_SHELL   False
 #define CONFIG_NEW_WINDOW_COMMAND "xterm"
@@ -27,15 +27,15 @@
 #define CONFIG_POINTER_STOPPED_DELAY  80
 #define CONFIG_DESTROY_WINDOW_DELAY   1500L
 
-#define CONFIG_TAB_FOREGROUND	  "black"
-#define CONFIG_TAB_BACKGROUND     "gray80"
-#define CONFIG_FRAME_BACKGROUND   "gray95"
-#define CONFIG_BUTTON_BACKGROUND  "gray95"
-#define CONFIG_BORDERS            "black"
+#define CONFIG_TAB_FOREGROUND	  ((char*)"black")
+#define CONFIG_TAB_BACKGROUND     ((char*)"gray80")
+#define CONFIG_FRAME_BACKGROUND   ((char*)"gray95")
+#define CONFIG_BUTTON_BACKGROUND  ((char*)"gray95")
+#define CONFIG_BORDERS            ((char*)"black")
 
-#define CONFIG_MENU_FOREGROUND    "black"
-#define CONFIG_MENU_BACKGROUND    "gray80"
-#define CONFIG_MENU_BORDERS       "black"
+#define CONFIG_MENU_FOREGROUND    ((char*)"black")
+#define CONFIG_MENU_BACKGROUND    ((char*)"gray80")
+#define CONFIG_MENU_BORDERS       ((char*)"black")
 
 #define CONFIG_FRAME_THICKNESS    7
 

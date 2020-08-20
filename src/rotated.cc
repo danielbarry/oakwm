@@ -470,7 +470,7 @@ void XRotDrawAlignedString(Display *dpy, XRotFontStruct *rotfont,
 {
   int xp = 0, yp = 0, dir;
   int i, nl = 1, max_width = 0, this_width;
-  char *str1, *str2 = "\n\0", *str3;
+  char *str1, *str2 = (char*)"\n\0", *str3;
 
   if (text == NULL)
     return;

@@ -58,15 +58,15 @@ Border::Border(Client *const c, Window child) :
 	}
 
 	m_foregroundPixel = windowManager()->allocateColour
-	    (CONFIG_TAB_FOREGROUND, "tab foreground");
+	    (CONFIG_TAB_FOREGROUND, (char*)"tab foreground");
 	m_backgroundPixel = windowManager()->allocateColour
-	    (CONFIG_TAB_BACKGROUND, "tab background");
+	    (CONFIG_TAB_BACKGROUND, (char*)"tab background");
 	m_frameBackgroundPixel = windowManager()->allocateColour
-	    (CONFIG_FRAME_BACKGROUND, "frame background");
+	    (CONFIG_FRAME_BACKGROUND, (char*)"frame background");
 	m_buttonBackgroundPixel = windowManager()->allocateColour
-	    (CONFIG_BUTTON_BACKGROUND, "button background");
+	    (CONFIG_BUTTON_BACKGROUND, (char*)"button background");
 	m_borderPixel = windowManager()->allocateColour
-	    (CONFIG_BORDERS, "border");
+	    (CONFIG_BORDERS, (char*)"border");
 
 	XGCValues values;
 	values.foreground = m_foregroundPixel;

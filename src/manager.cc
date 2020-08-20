@@ -274,11 +274,11 @@ void WindowManager::initialiseScreen()
     XSync(m_display, False);
 
     m_menuForegroundPixel =
-	allocateColour(CONFIG_MENU_FOREGROUND, "menu foreground");
+	allocateColour(CONFIG_MENU_FOREGROUND, (char*)"menu foreground");
     m_menuBackgroundPixel =
-	allocateColour(CONFIG_MENU_BACKGROUND, "menu background");
+	allocateColour(CONFIG_MENU_BACKGROUND, (char*)"menu background");
     m_menuBorderPixel =
-	allocateColour(CONFIG_MENU_BORDERS, "menu border");
+	allocateColour(CONFIG_MENU_BORDERS, (char*)"menu border");
 
     m_menuWindow = XCreateSimpleWindow
 	(m_display, m_root, 0, 0, 1, 1, 1,
@@ -391,7 +391,7 @@ void WindowManager::scanInitialWindows()
 
 Client* WindowManager::windowToClient(Window w, Boolean create){
   /* If no window was provided, we can't return a client */
-  if(w == NULL){
+  if(w == (Window)NULL){
     return NULL;
   }
   /* Search for a client for a given window */
