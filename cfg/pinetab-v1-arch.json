@@ -1,0 +1,195 @@
+{
+  "toolbar": {
+    // NOTE: Order matters - icons aligned right are displayed backwards.
+    "colours": {
+      "background": "FFFFFF",
+      "foreground": "000000",
+      "highlight": "0000FF"
+    },
+    "delay-usec": "50000",
+    "font": "-*-lucida-medium-r-*-*-18-*-75-75-*-*-*-*",
+    "height": "32",
+    "icons" : [
+      {
+        "align": "left",
+        "image": "res/plus.ppm",
+        "interactive": "true",
+        "menu": [
+          {
+            "command": "xterm -geometry 80x24+0+40 -e \"exec bash\" &",
+            "text": "Terminal"
+          },
+          {
+            "command": "dillo &",
+            "text": "Browser"
+          },
+          {
+            "command": "thunderbird &",
+            "text": "Email & Chat"
+          },
+          {
+            "command": "xterm -geometry 80x24+0+40 -e \"vim\" &",
+            "text": "Vim"
+          }
+        ],
+        "name": "Open"
+      },
+      {
+        "align": "left",
+        "image": "res/display.ppm",
+        "interactive": "true",
+        "menu": [
+          {
+            "command": "xrandr -o right; killall oakwm-toolbar; ./oakwm-toolbar &",
+            "text": "Rotate"
+          },
+          {
+            "text": "Snap Display"
+          }
+        ],
+        "name": "Display"
+      },
+      {
+        "align": "left",
+        "image": "res/front.ppm",
+        "interactive": "true",
+        "name": "Windows"
+      },
+      {
+        "align": "left",
+        "image": "res/keyboard.ppm",
+        "interactive": "true",
+        "menu": [
+          {
+            "command": "matchbox-keyboard &",
+            "text": "Open"
+          },
+          {
+            "command": "killall matchbox-keyboard &",
+            "text": "Close"
+          }
+        ],
+        "name": "Keyboard"
+      },
+      {
+        "align": "right",
+        "image": "res/power.ppm",
+        "interactive": "true",
+        "menu": [
+          {
+            "command": "killall oakwm &",
+            "text": "Log out"
+          },
+          {
+            "command": "xterm -e \"sudo systemctl suspend\" &",
+            "text": "Suspend"
+          },
+          {
+            "command": "xterm -e \"sudo systemctl poweroff\" &",
+            "text": "Power Off"
+          }
+        ],
+        "name": "Power"
+      },
+      {
+        "align": "right",
+        "image": "res/gear.ppm",
+        "interactive": "true",
+        "menu": [
+          {
+            "command": "xterm -geometry 80x24+0+40 -e \"sudo apt-get update; sudo apt-get upgrade\" &",
+            "text": "Update Pkg"
+          },
+          {
+            "command": "xterm -geometry 80x24+0+40 -e \"sudo apt-get autoremove; sudo apt-get autoclean\" &",
+            "text": "Clean Pkg"
+          },
+          {
+            "command": "nm-connection-editor &",
+            "text": "WiFi Config"
+          }
+        ],
+        "name": "Configuration"
+      },
+      {
+        "align": "right",
+        "image": "res/battery-full.ppm",
+        "interactive": "true",
+        "menu": [
+          { "text": "$POWER$" }
+        ],
+        "name": "Battery"
+      },
+      {
+        "align": "right",
+        "image": "res/volume-up.ppm",
+        "interactive": "true",
+        "menu": [
+          {
+            "command": "amixer sset 'Master' 0% &",
+            "text": "0%"
+          },
+          {
+            "command": "amixer sset 'Master' 10% &",
+            "text": "10%"
+          },
+          {
+            "command": "amixer sset 'Master' 20% &",
+            "text": "20%"
+          },
+          {
+            "command": "amixer sset 'Master' 30% &",
+            "text": "30%"
+          },
+          {
+            "command": "amixer sset 'Master' 40% &",
+            "text": "40%"
+          },
+          {
+            "command": "amixer sset 'Master' 50% &",
+            "text": "50%"
+          },
+          {
+            "command": "amixer sset 'Master' 60% &",
+            "text": "60%"
+          },
+          {
+            "command": "amixer sset 'Master' 70% &",
+            "text": "70%"
+          },
+          {
+            "command": "amixer sset 'Master' 80% &",
+            "text": "80%"
+          },
+          {
+            "command": "amixer sset 'Master' 90% &",
+            "text": "90%"
+          },
+          {
+            "command": "amixer sset 'Master' 100% &",
+            "text": "100%"
+          }
+        ],
+        "name": "Volume"
+      },
+      {
+        "align": "right",
+        "image": "res/wifi.ppm",
+        "interactive": "true",
+        "name": "Network"
+      }
+    ],
+    "menu": {
+      "max-items": "16",
+      "max-width": "128"
+    },
+    "modifiers": [
+      { "name": "active", "mask": "00FFFF" },
+      { "name": "focus",  "mask": "0000FF" }
+    ],
+    "power": {
+      "battery": "/sys/class/power_supply/axp20x-battery/capacity",
+      "dc": "/sys/class/power_supply/axp20x-usb/online"
+    }
+  }
+}
