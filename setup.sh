@@ -31,5 +31,4 @@ sudo apt-get -y autoremove
 sudo apt-get -y autoclean
 
 # Set the window manager details
-sudo ln -s /home/vagrant/dev/.xinitrc /home/vagrant/.xinitrc || true
-sudo ln -s /home/vagrant/dev/.xinitrc /root/.xinitrc || true
+sudo ln -s .xinitrc ~/.xinitrc || true
