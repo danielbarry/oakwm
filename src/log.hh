@@ -5,7 +5,7 @@
 #include <string>
 
 #ifndef LOG_NAME
-  #define LOGNAME "log"
+  #define LOG_NAME "log"
 #endif
 
 #define CLASS() std::string(__FILE__).substr(std::string(__FILE__).find_last_of('/') + 1)
