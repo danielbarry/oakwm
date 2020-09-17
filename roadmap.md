@@ -61,10 +61,6 @@
   * `[ ]` Modernize window decoration
   * `[ ]` Move configuration into JSON config file
   * `[ ]` Check for config file changes and reload
-* `[ ]` Settings
-  * `[ ]` Window to display setting types
-  * `[ ]` Adjustment of settings updates configuration file
-  * `[ ]` Template settings (min, max, default, value, type, etc)
 
 **Basic desktop and mobile:**
 
