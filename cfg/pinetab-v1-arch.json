@@ -97,11 +97,11 @@
         "interactive": "true",
         "menu": [
           {
-            "command": "xterm -geometry 80x24+0+40 -e \"sudo apt-get update; sudo apt-get upgrade\" &",
+            "command": "xterm -geometry 80x24+0+40 -e \"sudo pacman -Syu\" &",
             "text": "Update Pkg"
           },
           {
-            "command": "xterm -geometry 80x24+0+40 -e \"sudo apt-get autoremove; sudo apt-get autoclean\" &",
+            "command": "xterm -geometry 80x24+0+40 -e \"sudo paccache -ruk0\" &",
             "text": "Clean Pkg"
           },
           {
