@@ -61,6 +61,13 @@
   * `[ ]` Modernize window decoration
   * `[ ]` Move configuration into JSON config file
   * `[ ]` Check for config file changes and reload
+* `[ ]` General fixes for PineTab
+  * `[ ]` Multiple DC sources for charging
+  * `[ ]` Adjust screen brightness
+  * `[ ]` Adjust bluetooth settings
+  * `[ ]` Access canera
+  * `[ ]` Double listing network devices
+  * `[ ]` Ability to take sreenshots
 
 **Basic desktop and mobile:**
 
