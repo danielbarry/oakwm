@@ -24,8 +24,8 @@
             "text": "Browser"
           },
           {
-            "command": "thunderbird &",
-            "text": "Email & Chat"
+            "command": "konversation &",
+            "text": "Chat"
           },
           {
             "command": "xterm -geometry 80x24+0+40 -e \"vim\" &",
