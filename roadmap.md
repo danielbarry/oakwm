@@ -68,6 +68,7 @@
   * `[ ]` Access canera
   * `[ ]` Double listing network devices
   * `[ ]` Ability to take sreenshots
+  * `[ ]` Onscreen keyboards don't work
 
 **Basic desktop and mobile:**
 
