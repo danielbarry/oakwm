@@ -61,11 +61,11 @@
         "interactive": "true",
         "menu": [
           {
-            "command": "matchbox-keyboard &",
+            "command": "onboard &",
             "text": "Open"
           },
           {
-            "command": "killall matchbox-keyboard &",
+            "command": "killall onboard &",
             "text": "Close"
           }
         ],
