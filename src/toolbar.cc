@@ -1,5 +1,6 @@
 #include "toolbar.hh"
 
+//#define DEBUG
 #define LOG_NAME "toolbar"
 
 #include "git-rev.hh"
@@ -33,11 +34,16 @@ int main(int argc, char **argv){
   /* Start toolbar */
   LOG("Starting okawm toolbar...");
   Toolbar* toolbar = new Toolbar(config);
+  /* If we crashed out of the loop, dump profile data to disk log */
+  LOG("Dumping profiling measurements...");
+  LOG::DUMP_PROFILES();
+  LOG("Profile dump complete");
   /* Exit success */
   return 0;
 }
 
 Toolbar::Toolbar(char* filename){
+  LOG::START_PROFILE("INIT_TOOLBAR");
   /* Get settings if provided */
   if(filename != NULL){
     LOG("Loading configuration...");
@@ -136,6 +142,9 @@ Toolbar::Toolbar(char* filename){
     /* Add to data structure */
     icons.emplace_back(icon);
   }
+  /* Dump profile after completing the toolbar setup */
+  LOG::END_PROFILE("INIT_TOOLBAR");
+  LOG::DUMP_PROFILES();
   /* Enter main loop */
   loop();
 }

@@ -15,6 +15,7 @@ Icon::Icon(
   Window win,
   GC gc
 ){
+  LOG::START_PROFILE("INIT_ICON");
   nameId = iCfg->get("name")->value("");
   destX = 0;
   destY = 0;
@@ -49,6 +50,7 @@ Icon::Icon(
     /* Update our icon with modifiers */
     addModifier(name, mask, dis);
   }
+  LOG::END_PROFILE("INIT_ICON");
 }
 
 Icon::~Icon(){
