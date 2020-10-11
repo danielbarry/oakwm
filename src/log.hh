@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <ctime>
+#include <map>
 #include <string>
 
 #ifndef LOG_NAME
@@ -56,7 +57,14 @@
 
 class LOG{
   private:
+    struct PROFILE{
+      long long start;
+      long long sum;
+      long count;
+    };
+
     static long long START_TIME_NANOS;
+    static std::map<std::string, PROFILE*> profiles;
 
   public:
     /**
@@ -126,6 +134,79 @@ class LOG{
     }
 
     /**
+     * START_PROFILE()
+     *
+     * Start profiling a section of code. If profiling for this section already
+     * started, this will be averaged with existing profiles.
+     *
+     * @param name The unique name of the event being profiled.
+     **/
+    static void START_PROFILE(std::string name){
+#ifdef DEBUG
+      PROFILE* prof;
+      /* Find or create a new profile */
+      if(profiles.find(name) != profiles.end()){
+        prof = profiles[name];
+      }else{
+        prof = new PROFILE;
+        profiles[name] = prof;
+        prof->sum = 0;
+        prof->count = 0;
+      }
+      /* Lastly, set profile start time */
+      prof->start = LOG::CURRENT_TIME_NANOS();
+#endif
+    }
+
+    /**
+     * END_PROFILE()
+     *
+     * Indicate that the timing event has stopped.
+     *
+     * @param name The unique name of the event being profiled.
+     **/
+    static void END_PROFILE(std::string name){
+#ifdef DEBUG
+      /* Firstly, store current time */
+      long long end = LOG::CURRENT_TIME_NANOS();
+      PROFILE* prof;
+      /* Make sure that a profile exists */
+      if(profiles.find(name) != profiles.end()){
+        prof = profiles[name];
+      }else{
+        WARNM("No previous profile exists -> ", name.c_str());
+        return;
+      }
+      /* Store the latest result */
+      prof->sum += end - prof->start;
+      ++prof->count;
+#endif
+    }
+
+    /**
+     * DUMP_PROFILES()
+     *
+     * Save the latest profiles to the logs for later analysis. A good location
+     * for this is in the program's main loop or after some key event occurs,
+     **/
+    static void DUMP_PROFILES(){
+#ifdef DEBUG
+      /* Loop map entries */
+      for(std::map<std::string, PROFILE*>::iterator it = profiles.begin(); it != profiles.end(); it++){
+        double avg = (double)it->second->sum / (double)it->second->count;
+        LOGM(
+          "@PROFILE ",
+          (
+            it->first + " " +
+            std::to_string(avg) + " " +
+            std::to_string(it->second->count)
+          ).c_str()
+        );
+      }
+#endif
+    }
+
+    /**
      * WRITE_DISK_LOG()
      *
      * Append a string to a file on the disk in log format.
@@ -146,3 +227,4 @@ class LOG{
 };
 
 long long LOG::START_TIME_NANOS = LOG::CURRENT_TIME_NANOS();
+std::map<std::string, LOG::PROFILE*> LOG::profiles;
