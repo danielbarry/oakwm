@@ -8,10 +8,6 @@
 #include <X11/Xutil.h>
 #include <X11/Xos.h>
 
-/* NOTE: Hack for parsing non-strings into strings. */
-#define STR1(x) #x
-#define STR(x) STR1(x)
-
 /**
  * toolbar.hh
  *

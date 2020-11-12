@@ -9,6 +9,10 @@
   #define LOG_NAME "log"
 #endif
 
+/* NOTE: Hack for parsing non-strings into strings. */
+#define STR1(x) #x
+#define STR(x) STR1(x)
+
 #define CLASS() std::string(__FILE__).substr(std::string(__FILE__).find_last_of('/') + 1)
 
 #define CHEADER() printf("[\033[1;33m%lli\033[0m] \033[1;35m%s\033[0m->\033[1;34m%s()\033[0m::\033[1;36m%i\033[0m ", LOG::CURRENT_TIME_NANOS(), CLASS().c_str(), __FUNCTION__, __LINE__)
