@@ -1,6 +1,8 @@
 #pragma once
 
+#include <fstream>
 #include <ifaddrs.h>
+#include <string>
 
 #define MAGIC_EVIL_NUM 666
 
