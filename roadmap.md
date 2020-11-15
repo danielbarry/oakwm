@@ -72,6 +72,7 @@
 
 **Basic desktop and mobile:**
 
+* `[ ]` Copy and paste
 * `[ ]` Detect orientation change
 * `[ ]` Rotate display
   * `[ ]` Switch orientation of windows
@@ -91,3 +92,4 @@
 **Usability:**
 
 * `[ ]` Some automated install process for the window manager onto a system
+* `[ ]` Ship images to be used on supported devices
