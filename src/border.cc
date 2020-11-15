@@ -138,18 +138,25 @@ Window Border::root()
 void Border::expose(XExposeEvent *e)
 {
     if (e->window != m_tab) return;
+//    LOG::START_PROFILE("BORDER_EXPOSE");//TODO
     drawLabel();
+//    LOG::END_PROFILE("BORDER_EXPOSE");//TODO
+//    LOG::DUMP_PROFILES();//TODO
 }
 
 
 void Border::drawLabel()
 {
-    if (m_label) {
-	XClearWindow(display(), m_tab);
-	XRotDrawString(display(), m_tabFont, m_tab, m_drawGC,
-		       2 + m_tabFont->max_ascent, m_tabHeight - 1,
-		       m_label, strlen(m_label));
-    }
+//    if (m_label) {
+//        LOG::START_PROFILE("BORDER_DRAWLABEL_CLEAR");//TODO
+//	XClearWindow(display(), m_tab);
+//        LOG::END_PROFILE("BORDER_DRAWLABEL_CLEAR");//TODO
+//        LOG::START_PROFILE("BORDER_DRAWLABEL_DRAW");//TODO
+//	XRotDrawString(display(), m_tabFont, m_tab, m_drawGC,
+//		       2 + m_tabFont->max_ascent, m_tabHeight - 1,
+//		       m_label, strlen(m_label));
+//        LOG::END_PROFILE("BORDER_DRAWLABEL_DRAW");//TODO
+//    }
 }
 
 
