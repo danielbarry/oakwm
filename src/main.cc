@@ -1,4 +1,10 @@
+//#define DEBUG
+#define LOG_NAME "manager"
+
+#include "git-rev.hh"
+#include "log.hh"
 #include "manager.cc"
+#include "util.hh"
 
 /**
  * main()
@@ -12,6 +18,12 @@
  **/
 int main(int argc, char **argv){
   int i;
+  /* Dump version information */
+  LOGM("Build Date: ",   STR(BUILD_DATE));
+  LOGM("Build Branch: ", STR(GIT_BRANCH_RAW));
+  LOGM("Build Hash: ",   STR(GIT_HASH_RAW));
+  /* Start recording initialisation benchmark */
+  LOG::START_PROFILE("INIT_MAIN");
   /* If we have command line arguments, display an appropriate error */
   if(argc > 1){
     for(i = strlen(argv[0]) - 1; i > 0 && argv[0][i] != '/'; --i);
@@ -20,6 +32,9 @@ int main(int argc, char **argv){
   }
   /* Start window manager */
   WindowManager manager;
+  /* Dump profile after completing the manager setup */
+  LOG::END_PROFILE("INIT_MAIN");
+  LOG::DUMP_PROFILES();
   /* Exit success */
   return 0;
 }
