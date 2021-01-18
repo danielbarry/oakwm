@@ -126,6 +126,10 @@
         "interactive": "true",
         "menu": [
           {
+            "command": "xterm -geometry 80x24+0+40 -e \"pulsemixer\" &",
+            "text": "Settings"
+          },
+          {
             "command": "amixer sset 'Master' 0% &",
             "text": "0%"
           },
