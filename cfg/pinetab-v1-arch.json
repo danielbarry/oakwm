@@ -20,7 +20,7 @@
             "text": "Terminal"
           },
           {
-            "command": "dillo &",
+            "command": "netsurf &",
             "text": "Browser"
           },
           {
